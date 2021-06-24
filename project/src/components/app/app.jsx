@@ -14,7 +14,7 @@ import NotFounfPage from '../not-found-page/not-found-page';
 
 
 function App(props) {
-  const {filmsCount, filmName, filmGenre, filmYear} = props;
+  const {filmsCount, likeThisFilmsCount, myListFilmsCount, filmName, filmGenre, filmYear} = props;
 
   return (
     <BrowserRouter>
@@ -31,10 +31,10 @@ function App(props) {
           <SignInPage />
         </Route>
         <Route exact path={AppRoute.MY_LIST}>
-          <MyListPage />
+          <MyListPage myListFilmsCount={myListFilmsCount} />
         </Route>
         <Route exact path={AppRoute.FILM}>
-          <FilmPage />
+          <FilmPage likeThisFilmsCount={likeThisFilmsCount} />
         </Route>
         <Route exact path={AppRoute.ADD_REVIEW}>
           <AddReviewPage />
@@ -52,6 +52,8 @@ function App(props) {
 
 App.propTypes = {
   filmsCount: PropTypes.number.isRequired,
+  likeThisFilmsCount: PropTypes.number.isRequired,
+  myListFilmsCount: PropTypes.number.isRequired,
   filmName: PropTypes.string.isRequired,
   filmGenre: PropTypes.string.isRequired,
   filmYear: PropTypes.string.isRequired,

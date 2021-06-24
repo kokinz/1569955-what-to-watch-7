@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function FilmCard() {
 
@@ -8,7 +9,9 @@ function FilmCard() {
         <img src="img/pulp-fiction.jpg" alt="Pulp Fiction" width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">Pulp Fiction</a>
+        <Link className="small-film-card__link" to="films/7">
+          Pulp Fiction
+        </Link>
       </h3>
     </article>
   );
