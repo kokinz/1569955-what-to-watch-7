@@ -1,10 +1,18 @@
 import React from 'react';
+import {useParams} from 'react-router-dom';
 
-function PlayerPage() {
+import PropTypes from 'prop-types';
+import filmProp from '../film-page/film.prop';
+
+function PlayerPage(props) {
+  const {films} = props;
+
+  const filmId = parseInt(useParams().id, 10);
+  const film = films.find((movie) => (movie.id === filmId));
 
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg" />
+      <video src={film.videoLink} className="player__video" poster={film.posterImage}/>
       <button type="button" className="player__exit">Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
@@ -12,7 +20,7 @@ function PlayerPage() {
             <progress className="player__progress" value={30} max={100} />
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{film.runTime}</div>
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play">
@@ -21,7 +29,7 @@ function PlayerPage() {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{film.name}</div>
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width={27} height={27}>
               <use xlinkHref="#full-screen" />
@@ -33,5 +41,9 @@ function PlayerPage() {
     </div>
   );
 }
+
+PlayerPage.propTypes = {
+  films: PropTypes.arrayOf(filmProp).isRequired,
+};
 
 export default PlayerPage;

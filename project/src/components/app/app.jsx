@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 
 import {AppRoute} from '../../const';
+import filmProp from '../film-page/film.prop';
 
 import MainPage from '../main-page/main-page';
 import SignInPage from '../sign-in-page/sign-in-page';
@@ -14,33 +15,39 @@ import NotFounfPage from '../not-found-page/not-found-page';
 
 
 function App(props) {
-  const {filmsCount, likeThisFilmsCount, myListFilmsCount, filmName, filmGenre, filmYear} = props;
+  const {likeThisFilmsCount, films} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <MainPage
-            filmsCount={filmsCount}
-            filmName={filmName}
-            filmGenre={filmGenre}
-            filmYear={filmYear}
+            films={films}
           />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignInPage />
         </Route>
         <Route exact path={AppRoute.MY_LIST}>
-          <MyListPage myListFilmsCount={myListFilmsCount} />
+          <MyListPage
+            films={films}
+          />
         </Route>
         <Route exact path={AppRoute.FILM}>
-          <FilmPage likeThisFilmsCount={likeThisFilmsCount} />
+          <FilmPage
+            films={films}
+            likeThisFilmsCount={likeThisFilmsCount}
+          />
         </Route>
         <Route exact path={AppRoute.ADD_REVIEW}>
-          <AddReviewPage />
+          <AddReviewPage
+            films={films}
+          />
         </Route>
         <Route exact path={AppRoute.PLAYER}>
-          <PlayerPage />
+          <PlayerPage
+            films={films}
+          />
         </Route>
         <Route>
           <NotFounfPage />
@@ -51,12 +58,8 @@ function App(props) {
 }
 
 App.propTypes = {
-  filmsCount: PropTypes.number.isRequired,
   likeThisFilmsCount: PropTypes.number.isRequired,
-  myListFilmsCount: PropTypes.number.isRequired,
-  filmName: PropTypes.string.isRequired,
-  filmGenre: PropTypes.string.isRequired,
-  filmYear: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(filmProp).isRequired,
 };
 
 export default App;

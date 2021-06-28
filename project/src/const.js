@@ -1,3 +1,6 @@
+const RATING_COUNT = 10;
+const LIKE_THIS_FILMS_COUNT = 4;
+
 const AppRoute = {
   MAIN: '/',
   LOGIN: '/login',
@@ -7,4 +10,4 @@ const AppRoute = {
   PLAYER: '/player/:id',
 };
 
-export {AppRoute};
+export {AppRoute, RATING_COUNT, LIKE_THIS_FILMS_COUNT};

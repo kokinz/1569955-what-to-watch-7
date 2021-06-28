@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import filmProp from '../film-page/film.prop';
+
 import Logo from '../logo/logo';
-import FilmCard from '../film-card/film-card';
+import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
 function MyListPage(props) {
-  const {myListFilmsCount} = props;
+  const {films} = props;
+
+  const filteredFilms = films.slice().filter((film) => film.isFavorite);
 
   return (
     <div className="user-page">
@@ -27,7 +31,7 @@ function MyListPage(props) {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
-          {Array.from({length: myListFilmsCount}).map((index) => <FilmCard key={index}/>)}
+          <FilmList films={filteredFilms}></FilmList>
         </div>
       </section>
       <Footer />
@@ -36,7 +40,7 @@ function MyListPage(props) {
 }
 
 MyListPage.propTypes = {
-  myListFilmsCount: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(filmProp).isRequired,
 };
 
 export default MyListPage;
