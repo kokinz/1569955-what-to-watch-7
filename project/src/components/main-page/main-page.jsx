@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
+
+import filmProp from '../film-page/film.prop';
 
 import Logo from '../logo/logo';
-import FilmCard from '../film-card/film-card';
+import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
 function MainPage(props) {
-  const {filmsCount, filmName, filmGenre, filmYear} = props;
+  const {films} = props;
+  const history = useHistory();
 
   return (
     <>
@@ -39,20 +43,20 @@ function MainPage(props) {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmName}</h2>
+              <h2 className="film-card__title">{films[0].name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmGenre}</span>
-                <span className="film-card__year">{filmYear}</span>
+                <span className="film-card__genre">{films[0].genre}</span>
+                <span className="film-card__year">{films[0].name.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`/player/${films[0].id}`)}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={() => history.push('/mylist/')}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
@@ -102,7 +106,7 @@ function MainPage(props) {
           </ul>
 
           <div className="catalog__films-list">
-            {Array.from({length: filmsCount}).map((index) => <FilmCard key={index}/>)}
+            <FilmList films={films}></FilmList>
           </div>
 
           <div className="catalog__more">
@@ -117,10 +121,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  filmsCount: PropTypes.number.isRequired,
-  filmName: PropTypes.string.isRequired,
-  filmGenre: PropTypes.string.isRequired,
-  filmYear: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(filmProp).isRequired,
 };
 
 export default MainPage;

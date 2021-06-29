@@ -1,18 +1,29 @@
 import React from 'react';
+import {generatePath} from 'react-router';
+import {useParams, useHistory, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import filmProp from '../film-page/film.prop';
+
 import Logo from '../logo/logo';
-import FilmCard from '../film-card/film-card';
+import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
 function FilmPage(props) {
-  const {likeThisFilmsCount} = props;
+  const {likeThisFilmsCount, films} = props;
+
+  const filmId = parseInt(useParams().id, 10);
+  const history = useHistory();
+
+  const film = films.find((movie) => (movie.id === filmId));
+  const likeThisFilms = films.slice(0, likeThisFilmsCount);
+
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
@@ -30,25 +41,25 @@ function FilmPage(props) {
           </header>
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{film.genre}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`/player/${film.id}`)}>
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s" />
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={() => history.push('/mylist/')}>
                   <svg viewBox="0 0 19 20" width={19} height={20}>
                     <use xlinkHref="#add" />
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link className="btn film-card__button" to={generatePath('/films/:id/review', {id: filmId})}>Add review</Link>
               </div>
             </div>
           </div>
@@ -73,17 +84,16 @@ function FilmPage(props) {
                 </ul>
               </nav>
               <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
+                <div className="film-rating__score">{film.rating}</div>
                 <p className="film-rating__meta">
                   <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
+                  <span className="film-rating__count">{film.scoresCount} ratings</span>
                 </p>
               </div>
               <div className="film-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.</p>
-                <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-                <p className="film-card__director"><strong>Director: Wes Andreson</strong></p>
-                <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p>{film.description}</p>
+                <p className="film-card__director"><strong>Director: {film.director}</strong></p>
+                <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
               </div>
             </div>
           </div>
@@ -93,7 +103,7 @@ function FilmPage(props) {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
-            {Array.from({length: likeThisFilmsCount}).map((index) => <FilmCard key={index}/>)}
+            <FilmList films={likeThisFilms}></FilmList>
           </div>
         </section>
         <Footer />
@@ -104,6 +114,7 @@ function FilmPage(props) {
 
 FilmPage.propTypes = {
   likeThisFilmsCount: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(filmProp).isRequired,
 };
 
 export default FilmPage;
