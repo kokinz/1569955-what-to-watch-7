@@ -12,19 +12,19 @@ function ReviewForm() {
 
   const {rating, comment} = data;
 
-  function handleRatingChange(evt) {
+  const handleRatingChange = (evt) => {
     setData({
       ...data,
       rating: Number(evt.target.value),
     });
-  }
+  };
 
-  function handleTextChange(evt) {
+  const handleTextChange = (evt) => {
     setData({
       ...data,
       comment: evt.target.value,
     });
-  }
+  };
 
   return (
     <form action="#" className="add-review__form">

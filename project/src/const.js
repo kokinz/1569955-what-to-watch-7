@@ -1,5 +1,6 @@
 const RATING_COUNT = 10;
 const LIKE_THIS_FILMS_COUNT = 4;
+const PREVIEW_VIDEO_DELAY = 1000;
 
 const AppRoute = {
   MAIN: '/',
@@ -10,4 +11,4 @@ const AppRoute = {
   PLAYER: '/player/:id',
 };
 
-export {AppRoute, RATING_COUNT, LIKE_THIS_FILMS_COUNT};
+export {AppRoute, RATING_COUNT, LIKE_THIS_FILMS_COUNT, PREVIEW_VIDEO_DELAY};

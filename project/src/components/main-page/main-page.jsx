@@ -8,8 +8,7 @@ import Logo from '../logo/logo';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
-function MainPage(props) {
-  const {films} = props;
+function MainPage({films}) {
   const history = useHistory();
 
   return (

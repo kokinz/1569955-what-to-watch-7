@@ -9,9 +9,7 @@ import Logo from '../logo/logo';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
-function FilmPage(props) {
-  const {likeThisFilmsCount, films} = props;
-
+function FilmPage({likeThisFilmsCount, films}) {
   const filmId = parseInt(useParams().id, 10);
   const history = useHistory();
 

@@ -4,9 +4,7 @@ import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import filmProp from '../film-page/film.prop';
 
-function PlayerPage(props) {
-  const {films} = props;
-
+function PlayerPage({films}) {
   const filmId = parseInt(useParams().id, 10);
   const film = films.find((movie) => (movie.id === filmId));
 
