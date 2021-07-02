@@ -8,9 +8,7 @@ import filmProp from '../film-page/film.prop';
 import Logo from '../logo/logo';
 import ReviewForm from '../review-form/review-form';
 
-function AddReviewPage(props) {
-  const {films} = props;
-
+function AddReviewPage({films}) {
   const filmId = parseInt(useParams().id, 10);
   const film = films.find((movie) => (movie.id === filmId));
 

@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ReviewFormField(props) {
-  const {index, value, handleRatingChange} = props;
-
+function ReviewFormField({index, value, handleRatingChange}) {
   return (
     <>
       <input className="rating__input" id={`star-${index}`} type="radio" name="rating" defaultValue={index} checked={value === index} onChange={handleRatingChange}/>

@@ -7,9 +7,7 @@ import Logo from '../logo/logo';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
-function MyListPage(props) {
-  const {films} = props;
-
+function MyListPage({films}) {
   const filteredFilms = films.slice().filter((film) => film.isFavorite);
 
   return (

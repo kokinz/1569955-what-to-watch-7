@@ -14,9 +14,7 @@ import PlayerPage from '../player-page/player-page';
 import NotFounfPage from '../not-found-page/not-found-page';
 
 
-function App(props) {
-  const {likeThisFilmsCount, films} = props;
-
+function App({likeThisFilmsCount, films}) {
   return (
     <BrowserRouter>
       <Switch>
