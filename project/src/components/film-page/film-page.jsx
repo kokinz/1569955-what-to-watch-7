@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import filmProp from '../film-page/film.prop';
 
 import Logo from '../logo/logo';
+import Tabs from './tabs/tabs';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
@@ -53,7 +54,7 @@ function FilmPage({likeThisFilmsCount, films}) {
                 </button>
                 <button className="btn btn--list film-card__button" type="button" onClick={() => history.push('/mylist/')}>
                   <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
+                    <use xlinkHref={film.isFavorite ? '#in-list' : '#add'} />
                   </svg>
                   <span>My list</span>
                 </button>
@@ -65,35 +66,9 @@ function FilmPage({likeThisFilmsCount, films}) {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+              <img src={film.posterImage} alt="The Grand Budapest Hotel poster" width={218} height={327} />
             </div>
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-              <div className="film-rating">
-                <div className="film-rating__score">{film.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{film.scoresCount} ratings</span>
-                </p>
-              </div>
-              <div className="film-card__text">
-                <p>{film.description}</p>
-                <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
-              </div>
-            </div>
+            <Tabs film={film} />
           </div>
         </div>
       </section>

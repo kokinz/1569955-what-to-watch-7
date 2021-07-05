@@ -11,4 +11,10 @@ const AppRoute = {
   PLAYER: '/player/:id',
 };
 
-export {AppRoute, RATING_COUNT, LIKE_THIS_FILMS_COUNT, PREVIEW_VIDEO_DELAY};
+const FilmTabs = {
+  OVERVIEW: 'Overview',
+  DETAILS: 'Details',
+  REVIEWS: 'Reviews',
+};
+
+export {AppRoute, FilmTabs, RATING_COUNT, LIKE_THIS_FILMS_COUNT, PREVIEW_VIDEO_DELAY};
