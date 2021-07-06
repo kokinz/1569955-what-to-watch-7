@@ -4,11 +4,12 @@ import DetailsTab from './details-tab';
 import ReviewsTab from './reviews-tab';
 
 import filmProp from '../film.prop';
-import {FilmTabs} from '../../../const.js';
+import {FilmTab} from '../../../const.js';
+import {reviews} from '../../../mocks/reviews.js';
 
 function Tabs({film}) {
-  const [activeTab, setActiveTab] = useState(FilmTabs.OVERVIEW);
-  const tabs = Object.values(FilmTabs);
+  const [activeTab, setActiveTab] = useState(FilmTab.OVERVIEW);
+  const tabs = Object.values(FilmTab);
 
   const handleMouseClick = (evt) => {
     evt.preventDefault();
@@ -27,9 +28,9 @@ function Tabs({film}) {
           ))}
         </ul>
       </nav>
-      {activeTab === FilmTabs.OVERVIEW && <OverviewTab film={film} />}
-      {activeTab === FilmTabs.DETAILS && <DetailsTab film={film} />}
-      {activeTab === FilmTabs.REVIEWS && <ReviewsTab film={film} />}
+      {activeTab === FilmTab.OVERVIEW && <OverviewTab film={film} />}
+      {activeTab === FilmTab.DETAILS && <DetailsTab film={film} />}
+      {activeTab === FilmTab.REVIEWS && <ReviewsTab reviews={reviews} />}
     </div>);
 }
 
