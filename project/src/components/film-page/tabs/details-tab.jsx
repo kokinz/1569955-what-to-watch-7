@@ -13,7 +13,12 @@ function DetailsTab({film}) {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {film.starring.join(', ')}
+            {film.starring.slice().join(',_').split('_').map((star) => (
+              <React.Fragment key={star}>
+                {star}
+                <br />
+              </React.Fragment>
+            ))}
           </span>
         </p>
       </div>
