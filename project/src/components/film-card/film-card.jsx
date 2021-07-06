@@ -27,7 +27,7 @@ function FilmCard({film}) {
         <video src={previewVideoLink} poster={previewImage} ref={player} width="213.25" height="175" muted />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={generatePath('/films/:id/', {id: id})}>
+        <Link className="small-film-card__link" to={generatePath('/films/:id/', {id: id})} onClick={handleMouseLeave}>
           {name}
         </Link>
       </h3>
