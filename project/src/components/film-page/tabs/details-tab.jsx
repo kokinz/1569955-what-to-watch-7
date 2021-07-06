@@ -25,7 +25,7 @@ function DetailsTab({film}) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{Math.floor(film.runTime / 60)}h {film.runTime % 60}m</span>
+          <span className="film-card__details-value">{Math.floor(film.runTime / 60) === 0 ? '' : `${Math.floor(film.runTime / 60)}h `} {film.runTime % 60}m</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
