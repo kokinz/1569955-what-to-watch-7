@@ -2,6 +2,8 @@ const RATING_COUNT = 10;
 const LIKE_THIS_FILMS_COUNT = 4;
 const PREVIEW_VIDEO_DELAY = 1000;
 
+const ALL_GENRES = 'All genres';
+
 const AppRoute = {
   MAIN: '/',
   LOGIN: '/login',
@@ -17,4 +19,4 @@ const FilmTab = {
   REVIEWS: 'Reviews',
 };
 
-export {AppRoute, FilmTab, RATING_COUNT, LIKE_THIS_FILMS_COUNT, PREVIEW_VIDEO_DELAY};
+export {AppRoute, FilmTab, ALL_GENRES, RATING_COUNT, LIKE_THIS_FILMS_COUNT, PREVIEW_VIDEO_DELAY};
