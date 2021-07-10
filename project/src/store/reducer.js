@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_FILMS_BY_GENRE:
       return {
         ...state,
-        films: getFilmsByGenre(films, action.payload),
+        films: getFilmsByGenre(films, state.genre),
       };
     default:
       return state;

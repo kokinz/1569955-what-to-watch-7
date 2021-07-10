@@ -10,7 +10,6 @@ const ActionCreator = {
   }),
   getFilmsByGenre: (genre) => ({
     type: ActionType.GET_FILMS_BY_GENRE,
-    payload: genre,
   }),
 };
 
