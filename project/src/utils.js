@@ -3,7 +3,7 @@ import {ALL_GENRES} from './const.js';
 const getGenresList = (films) => {
   const  genreList = new Set();
   genreList.add(ALL_GENRES);
-  films.map((film) => genreList.add(film.genre));
+  films.forEach((film) => genreList.add(film.genre));
   return Array.from(genreList);
 };
 
