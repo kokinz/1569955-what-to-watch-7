@@ -84,7 +84,6 @@ function MainPage({films, genre, onGenreChange, filmsByGenre}) {
 
           <GenreList films={films} currentGenre={genre} onGenreChange={onGenreChange}/>
 
-<h3>{shownFilmsCount}</h3>
           <div className="catalog__films-list">
             <FilmList films={filmsByGenre.slice(0, shownFilmsCount)} />
           </div>
