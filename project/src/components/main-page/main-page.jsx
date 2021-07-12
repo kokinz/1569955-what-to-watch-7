@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -9,10 +9,18 @@ import filmProp from '../film-page/film.prop';
 import Logo from '../logo/logo';
 import GenreList from '../genre-list/genre-list';
 import FilmList from '../film-list/film-list';
+import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
+
+import {SHOW_MORE_FILMS_COUNT} from '../../const.js';
 
 function MainPage({films, genre, onGenreChange, filmsByGenre}) {
   const history = useHistory();
+  const [shownFilmsCount, setShownFilmsCount] = useState(Math.min(filmsByGenre.length, SHOW_MORE_FILMS_COUNT));
+
+  const handleShowMoreClick = () => {
+    setShownFilmsCount(shownFilmsCount + SHOW_MORE_FILMS_COUNT);
+  };
 
   return (
     <>
@@ -76,12 +84,13 @@ function MainPage({films, genre, onGenreChange, filmsByGenre}) {
 
           <GenreList films={films} currentGenre={genre} onGenreChange={onGenreChange}/>
 
+<h3>{shownFilmsCount}</h3>
           <div className="catalog__films-list">
-            <FilmList films={filmsByGenre} />
+            <FilmList films={filmsByGenre.slice(0, shownFilmsCount)} />
           </div>
 
           <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+            {shownFilmsCount < filmsByGenre.length ? <ShowMoreButton handleShowMoreClick={handleShowMoreClick} /> : ''}
           </div>
         </section>
 

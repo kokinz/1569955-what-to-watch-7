@@ -8,7 +8,7 @@ const ActionCreator = {
     type: ActionType.CHANGE_GENRE,
     payload: genre,
   }),
-  getFilmsByGenre: (genre) => ({
+  getFilmsByGenre: () => ({
     type: ActionType.GET_FILMS_BY_GENRE,
   }),
 };
