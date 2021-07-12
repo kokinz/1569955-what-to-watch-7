@@ -1,11 +1,10 @@
 import React from 'react';
 import Moment from 'react-moment';
+import PropTypes from 'prop-types';
 
-import filmProp from '../film.prop';
+import reviewProp from '../review.prop.js';
 
-import {reviews} from '../../../mocks/reviews.js';
-
-function ReviewsTab({film}) {
+function ReviewsTab({reviews}) {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
@@ -49,7 +48,7 @@ function ReviewsTab({film}) {
 }
 
 ReviewsTab.propTypes = {
-  film: filmProp,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 export default ReviewsTab;
