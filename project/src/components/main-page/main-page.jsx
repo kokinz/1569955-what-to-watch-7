@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -17,6 +17,10 @@ import {SHOW_MORE_FILMS_COUNT} from '../../const.js';
 function MainPage({films, genre, onGenreChange, filmsByGenre}) {
   const history = useHistory();
   const [shownFilmsCount, setShownFilmsCount] = useState(Math.min(filmsByGenre.length, SHOW_MORE_FILMS_COUNT));
+
+  useEffect(() => {
+    setShownFilmsCount(SHOW_MORE_FILMS_COUNT);
+  }, [filmsByGenre]);
 
   const handleShowMoreClick = () => {
     setShownFilmsCount(shownFilmsCount + SHOW_MORE_FILMS_COUNT);
