@@ -112,7 +112,8 @@ MainPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   genre: state.genre,
-  filmsByGenre: state.films,
+  films: state.films,
+  filmsByGenre: state.filmsByGenre,
 });
 
 const mapDispatchToProps = (dispatch) => ({
