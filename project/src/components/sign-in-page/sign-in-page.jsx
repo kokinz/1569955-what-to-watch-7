@@ -27,6 +27,7 @@ function SignInPage({authorizationStatus, onSubmit}) {
   return (
     checkAuthorized(authorizationStatus) ?
       <Redirect to={AppRoute.MAIN}></Redirect> :
+
       <div className="user-page">
         <header className="page-header user-page__head">
           <Logo />

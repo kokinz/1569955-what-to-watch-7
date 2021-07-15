@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import filmProp from '../film-page/film.prop';
 
 import Logo from '../logo/logo';
+import UserAvatar from '../user-avatar/user-avatar';
 import Tabs from './tabs/tabs';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
@@ -27,16 +28,7 @@ function FilmPage({likeThisFilmsCount, films}) {
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
             <Logo />
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href="/" className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserAvatar />
           </header>
           <div className="film-card__wrap">
             <div className="film-card__desc">

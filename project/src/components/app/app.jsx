@@ -36,7 +36,7 @@ function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
         <PrivateRoute
           exact
           path={AppRoute.MY_LIST}
-          render={() => <MyListPage />}
+          render={() => <MyListPage films={films} />}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.FILM}>
@@ -48,7 +48,7 @@ function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
         <PrivateRoute
           exact
           path={AppRoute.ADD_REVIEW}
-          render={() => <AddReviewPage />}
+          render={() => <AddReviewPage films={films} />}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.PLAYER}>

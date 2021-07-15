@@ -18,7 +18,7 @@ const ActionCreator = {
     type: ActionType.LOAD_FILMS,
     payload: films,
   }),
-  requiredAuthorization: (status) => ({
+  requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
   }),

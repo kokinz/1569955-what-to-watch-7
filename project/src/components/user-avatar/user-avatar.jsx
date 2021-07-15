@@ -1,22 +1,31 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {checkAuthorized} from '../../utils.js';
+import {logout} from '../../store/api-actions';
 import {AppRoute} from '../../const.js';
 
-function UserAvatar({authorizationStatus}) {
+function UserAvatar({authorizationStatus, onLogout}) {
+  const history = useHistory();
+
+  const handleLogout = (evt) => {
+    evt.preventDefault();
+
+    onLogout();
+  };
+
   return (
     checkAuthorized(authorizationStatus) ?
       <ul className="user-block">
         <li className="user-block__item">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" onClick={() => <Redirect to={AppRoute.MY_LIST}></Redirect>}/>
+          <div className="user-block__avatar" onClick={() => history.push(AppRoute.MY_LIST)}>
+            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
           </div>
         </li>
         <li className="user-block__item">
-          <a className="user-block__link" href="/">Sign out</a>
+          <a className="user-block__link" href="/" onClick={handleLogout}>Sign out</a>
         </li>
       </ul> :
       <div className="user-block">
@@ -27,11 +36,18 @@ function UserAvatar({authorizationStatus}) {
 
 UserAvatar.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLogout() {
+    dispatch(logout());
+  },
+});
+
 export {UserAvatar};
-export default connect(mapStateToProps)(UserAvatar);
+export default connect(mapStateToProps, mapDispatchToProps)(UserAvatar);
