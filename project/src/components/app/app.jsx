@@ -6,6 +6,7 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import filmProp from '../film-page/film.prop';
 
+import PrivateRoute from '../private-route/private-route';
 import MainPage from '../main-page/main-page';
 import SignInPage from '../sign-in-page/sign-in-page';
 import MyListPage from '../my-list-page/my-list-page';
@@ -32,22 +33,24 @@ function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
         <Route exact path={AppRoute.LOGIN}>
           <SignInPage />
         </Route>
-        <Route exact path={AppRoute.MY_LIST}>
-          <MyListPage
-            films={films}
-          />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.MY_LIST}
+          render={() => <MyListPage />}
+        >
+        </PrivateRoute>
         <Route exact path={AppRoute.FILM}>
           <FilmPage
             films={films}
             likeThisFilmsCount={likeThisFilmsCount}
           />
         </Route>
-        <Route exact path={AppRoute.ADD_REVIEW}>
-          <AddReviewPage
-            films={films}
-          />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.ADD_REVIEW}
+          render={() => <AddReviewPage />}
+        >
+        </PrivateRoute>
         <Route exact path={AppRoute.PLAYER}>
           <PlayerPage
             films={films}
