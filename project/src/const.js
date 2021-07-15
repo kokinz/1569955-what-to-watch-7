@@ -19,4 +19,26 @@ const FilmTab = {
   REVIEWS: 'Reviews',
 };
 
-export {AppRoute, FilmTab, ALL_GENRES, RATING_COUNT, LIKE_THIS_FILMS_COUNT, SHOW_MORE_FILMS_COUNT, PREVIEW_VIDEO_DELAY};
+const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
+
+const APIRoute = {
+  FILMS: '/films',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
+
+export {
+  AppRoute,
+  FilmTab,
+  AuthorizationStatus,
+  APIRoute,
+  ALL_GENRES,
+  RATING_COUNT,
+  LIKE_THIS_FILMS_COUNT,
+  SHOW_MORE_FILMS_COUNT,
+  PREVIEW_VIDEO_DELAY
+};

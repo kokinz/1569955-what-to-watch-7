@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import filmProp from '../film-page/film.prop';
 
 import MainPage from '../main-page/main-page';
@@ -12,16 +13,21 @@ import FilmPage from '../film-page/film-page';
 import AddReviewPage from '../add-review-page/add-review-page';
 import PlayerPage from '../player-page/player-page';
 import NotFounfPage from '../not-found-page/not-found-page';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
-function App({likeThisFilmsCount, films}) {
+function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
+  if (authorizationStatus === AuthorizationStatus.UNKNOWN || !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
-          <MainPage
-            films={films}
-          />
+          <MainPage />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignInPage />
@@ -58,6 +64,15 @@ function App({likeThisFilmsCount, films}) {
 App.propTypes = {
   likeThisFilmsCount: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(filmProp).isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  films: state.films,
+  authorizationStatus: state.authorizationStatus,
+  isDataLoaded: state.isDataLoaded,
+});
+
+export {App};
+export default connect(mapStateToProps, null)(App);
