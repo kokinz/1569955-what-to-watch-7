@@ -17,7 +17,7 @@ import {LIKE_THIS_FILMS_COUNT, AuthorizationStatus} from './const.js';
 const store = createStore(reducer, composeWithDevTools(
   applyMiddleware(thunk.withExtraArgument(
     createAPI(
-      () => store.dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH)),
+      () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
     ),
   )),
 ));
