@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import {generatePath} from 'react-router';
 import {useParams, useHistory, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import filmProp from '../film-page/film.prop';
+import {fetchFilm, fetchSimilarFilms, fetchReviews} from '../../store/api-actions';
 
 import Logo from '../logo/logo';
 import UserAvatar from '../user-avatar/user-avatar';
@@ -11,12 +13,16 @@ import Tabs from './tabs/tabs';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
-function FilmPage({likeThisFilmsCount, films}) {
+function FilmPage({likeThisFilmsCount, films, loadData}) {
   const filmId = parseInt(useParams().id, 10);
   const history = useHistory();
 
   const film = films.find((movie) => (movie.id === filmId));
   const likeThisFilms = films.slice(0, likeThisFilmsCount);
+
+  useEffect(() => {
+    loadData(filmId);
+  }, []);
 
   return (
     <>
@@ -80,6 +86,22 @@ function FilmPage({likeThisFilmsCount, films}) {
 FilmPage.propTypes = {
   likeThisFilmsCount: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(filmProp).isRequired,
+  loadData: PropTypes.func.isRequired,
 };
 
-export default FilmPage;
+const mapStateToProps = (state) => ({
+  film: state.film,
+  similarFilms: state.similarFilms,
+  reviews: state.reviews,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadData(filmId) {
+    dispatch(fetchFilm(filmId));
+    dispatch(fetchSimilarFilms(filmId));
+    dispatch(fetchReviews(filmId));
+  },
+});
+
+export {FilmPage};
+export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);

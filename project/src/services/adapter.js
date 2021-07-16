@@ -20,4 +20,4 @@ const adaptFilmToClient = (film) => ({
 
 const adaptFilmsToClient = (films) => (films.map((film) => adaptFilmToClient(film)));
 
-export {adaptFilmsToClient};
+export {adaptFilmsToClient, adaptFilmToClient};
