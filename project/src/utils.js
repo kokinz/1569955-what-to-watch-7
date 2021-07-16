@@ -1,4 +1,4 @@
-import {ALL_GENRES} from './const.js';
+import {ALL_GENRES, AuthorizationStatus} from './const.js';
 
 const getGenresList = (films) => {
   const  genreList = new Set();
@@ -9,4 +9,6 @@ const getGenresList = (films) => {
 
 const getFilmsByGenre = (films, genre) => (genre === ALL_GENRES) ? films : films.slice().filter((film) => film.genre === genre);
 
-export {getGenresList, getFilmsByGenre};
+const checkAuthorized = (status) => status === AuthorizationStatus.AUTH;
+
+export {getGenresList, getFilmsByGenre, checkAuthorized};

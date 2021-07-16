@@ -7,6 +7,7 @@ import {ActionCreator} from '../../store/action';
 import filmProp from '../film-page/film.prop';
 
 import Logo from '../logo/logo';
+import UserAvatar from '../user-avatar/user-avatar';
 import GenreList from '../genre-list/genre-list';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
@@ -38,16 +39,7 @@ function MainPage({films, genre, onGenreChange, filmsByGenre}) {
         <header className="page-header film-card__head">
           <Logo />
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/">Sign out</a>
-            </li>
-          </ul>
+          <UserAvatar />
         </header>
 
         <div className="film-card__wrap">
@@ -70,7 +62,7 @@ function MainPage({films, genre, onGenreChange, filmsByGenre}) {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={() => history.push('/mylist/')}>
+                <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>

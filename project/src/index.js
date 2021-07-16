@@ -14,12 +14,12 @@ import {checkAuth, fetchFilmsList} from './store/api-actions';
 
 import {LIKE_THIS_FILMS_COUNT, AuthorizationStatus} from './const.js';
 
-const api = createAPI(
-  () => store.dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH)),
-);
-
 const store = createStore(reducer, composeWithDevTools(
-  applyMiddleware(thunk.withExtraArgument(api)),
+  applyMiddleware(thunk.withExtraArgument(
+    createAPI(
+      () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
+    ),
+  )),
 ));
 
 store.dispatch(checkAuth());
