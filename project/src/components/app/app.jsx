@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 
 import {AppRoute, AuthorizationStatus} from '../../const';
 import filmProp from '../film-page/film.prop';
+import browserHistory from '../../browser-history.js';
 
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../main-page/main-page';
@@ -17,7 +18,7 @@ import NotFounfPage from '../not-found-page/not-found-page';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 
-function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
+function App({films, authorizationStatus, isDataLoaded}) {
   if (authorizationStatus === AuthorizationStatus.UNKNOWN || !isDataLoaded) {
     return (
       <LoadingScreen />
@@ -25,7 +26,7 @@ function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <MainPage />
@@ -42,7 +43,6 @@ function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
         <Route exact path={AppRoute.FILM}>
           <FilmPage
             films={films}
-            likeThisFilmsCount={likeThisFilmsCount}
           />
         </Route>
         <PrivateRoute
@@ -57,7 +57,7 @@ function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
           />
         </Route>
         <Route>
-          <NotFounfPage />
+          <NotFounfPage path={AppRoute.NOT_FOUND}/>
         </Route>
       </Switch>
     </BrowserRouter>
@@ -65,7 +65,6 @@ function App({likeThisFilmsCount, films, authorizationStatus, isDataLoaded}) {
 }
 
 App.propTypes = {
-  likeThisFilmsCount: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(filmProp).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,

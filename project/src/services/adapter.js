@@ -1,5 +1,5 @@
 const adaptFilmToClient = (film) => ({
-  'id': film.id,
+  'id': parseInt(film.id, 10),
   'name': film.name,
   'posterImage': film.poster_image,
   'previewImage': film.preview_image,

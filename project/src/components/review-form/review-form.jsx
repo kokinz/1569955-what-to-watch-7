@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
+import {postReview} from '../../store/api-actions.js';
 
 import ReviewFormField from '../review-form-field/review-form-field';
 
 import {RATING_COUNT} from '../../const';
 
-function ReviewForm() {
+function ReviewForm({id, onSubmit}) {
   const [data, setData] = useState({
     rating: 7,
     comment: '',
@@ -26,8 +30,18 @@ function ReviewForm() {
     });
   };
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    onSubmit({
+      id: id,
+      rating: data.rating,
+      comment: data.comment,
+    });
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={handleSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {Array.from({length: RATING_COUNT}).map((element, index) => {
@@ -49,4 +63,16 @@ function ReviewForm() {
   );
 }
 
-export default ReviewForm;
+ReviewForm.propTypes = {
+  id: PropTypes.number.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(authData) {
+    dispatch(postReview(authData));
+  },
+});
+
+export {ReviewForm};
+export default connect(null, mapDispatchToProps)(ReviewForm);

@@ -11,6 +11,7 @@ const AppRoute = {
   FILM: '/films/:id',
   ADD_REVIEW: '/films/:id/review',
   PLAYER: '/player/:id',
+  NOT_FOUND: '/404',
 };
 
 const FilmTab = {

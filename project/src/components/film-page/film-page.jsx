@@ -4,7 +4,9 @@ import {generatePath} from 'react-router';
 import {useParams, useHistory, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+
 import filmProp from '../film-page/film.prop';
+import reviewProp from '../film-page/review.prop';
 import {fetchFilm, fetchSimilarFilms, fetchReviews} from '../../store/api-actions';
 
 import Logo from '../logo/logo';
@@ -13,16 +15,18 @@ import Tabs from './tabs/tabs';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
-function FilmPage({likeThisFilmsCount, films, loadData}) {
+import {LIKE_THIS_FILMS_COUNT} from '../../const.js';
+import {checkAuthorized} from '../../utils.js';
+
+function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) {
   const filmId = parseInt(useParams().id, 10);
   const history = useHistory();
 
-  const film = films.find((movie) => (movie.id === filmId));
-  const likeThisFilms = films.slice(0, likeThisFilmsCount);
+  const likeThisFilms = similarFilms.filter((movie) => movie.id !== filmId).slice(0, LIKE_THIS_FILMS_COUNT);
 
   useEffect(() => {
     loadData(filmId);
-  }, []);
+  }, [filmId, loadData]);
 
   return (
     <>
@@ -44,7 +48,7 @@ function FilmPage({likeThisFilmsCount, films, loadData}) {
                 <span className="film-card__year">{film.released}</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`/player/${film.id}`)}>
+                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`/player/${filmId}`)}>
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s" />
                   </svg>
@@ -56,7 +60,7 @@ function FilmPage({likeThisFilmsCount, films, loadData}) {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link className="btn film-card__button" to={generatePath('/films/:id/review', {id: filmId})}>Add review</Link>
+                {checkAuthorized(authorizationStatus) ? <Link className="btn film-card__button" to={generatePath('/films/:id/review', {id: filmId})}>Add review</Link> : ''}
               </div>
             </div>
           </div>
@@ -66,7 +70,7 @@ function FilmPage({likeThisFilmsCount, films, loadData}) {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt="The Grand Budapest Hotel poster" width={218} height={327} />
             </div>
-            <Tabs film={film} />
+            {film.id ? <Tabs film={film} reviews={reviews}/> : ''}
           </div>
         </div>
       </section>
@@ -84,15 +88,18 @@ function FilmPage({likeThisFilmsCount, films, loadData}) {
 }
 
 FilmPage.propTypes = {
-  likeThisFilmsCount: PropTypes.number.isRequired,
-  films: PropTypes.arrayOf(filmProp).isRequired,
   loadData: PropTypes.func.isRequired,
+  film: PropTypes.shape(filmProp).isRequired,
+  similarFilms: PropTypes.arrayOf(filmProp).isRequired,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   film: state.film,
   similarFilms: state.similarFilms,
   reviews: state.reviews,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

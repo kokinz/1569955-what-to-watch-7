@@ -25,10 +25,10 @@ function AddReviewPage({films}) {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={generatePath('/films/:id/', {id: filmId})} className="breadcrumbs__link">{film.name}l</Link>
+                <Link to={generatePath('/films/:id/', {id: filmId})} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link" href="/">Add review</a>
+                <a className="breadcrumbs__link" href="/" onClick={(evt) => evt.preventDefault()}>Add review</a>
               </li>
             </ul>
           </nav>
@@ -39,7 +39,7 @@ function AddReviewPage({films}) {
         </div>
       </div>
       <div className="add-review">
-        <ReviewForm />
+        <ReviewForm id={filmId}/>
       </div>
     </section>
   );
