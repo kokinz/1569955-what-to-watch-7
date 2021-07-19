@@ -7,6 +7,9 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import filmProp from '../film-page/film.prop';
 import browserHistory from '../../browser-history.js';
 
+import {getFilms, getLoadedDataStatus} from '../../store/films-data/selectors.js';
+import {getAuthorizationStatus} from '../../store/user-data/selectors.js';
+
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../main-page/main-page';
 import SignInPage from '../sign-in-page/sign-in-page';
@@ -16,7 +19,6 @@ import AddReviewPage from '../add-review-page/add-review-page';
 import PlayerPage from '../player-page/player-page';
 import NotFounfPage from '../not-found-page/not-found-page';
 import LoadingScreen from '../loading-screen/loading-screen';
-
 
 function App({films, authorizationStatus, isDataLoaded}) {
   if (authorizationStatus === AuthorizationStatus.UNKNOWN || !isDataLoaded) {
@@ -71,9 +73,9 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
-  authorizationStatus: state.authorizationStatus,
-  isDataLoaded: state.isDataLoaded,
+  films: getFilms(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  isDataLoaded: getLoadedDataStatus(state),
 });
 
 export {App};

@@ -8,17 +8,17 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import App from './components/app/app';
 
 import {createAPI} from './services/api';
-import {reducer} from './store/reducer';
-import {ActionCreator} from './store/action';
+import rootReducer from './store/root-reducer';
+import {requireAuthorization} from './store/action';
 import {checkAuth, fetchFilmsList} from './store/api-actions';
 
 import {AuthorizationStatus} from './const.js';
 import {redirect} from './store/middlewares/redirect';
 
-const store = createStore(reducer, composeWithDevTools(
+const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk.withExtraArgument(
     createAPI(
-      () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
+      () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
     ),
   )),
   applyMiddleware(redirect),
