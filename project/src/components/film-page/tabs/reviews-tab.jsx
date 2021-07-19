@@ -1,6 +1,6 @@
 import React from 'react';
-import Moment from 'react-moment';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
 import reviewProp from '../review.prop.js';
 
@@ -8,7 +8,7 @@ function ReviewsTab({reviews}) {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.slice(0, reviews.length / 2).map((review) => (
+        {reviews.slice(0, Math.ceil(reviews.length / 2)).map((review) => (
           <div className="review" key={review.id}>
             <blockquote className="review__quote">
               <p className="review__text">{review.comment}</p>
@@ -26,7 +26,7 @@ function ReviewsTab({reviews}) {
         ))}
       </div>
       <div className="film-card__reviews-col">
-        {reviews.slice(reviews.length / 2).map((review) => (
+        {reviews.slice(Math.ceil(reviews.length / 2)).map((review) => (
           <div className="review" key={review.id}>
             <blockquote className="review__quote">
               <p className="review__text">{review.comment}</p>

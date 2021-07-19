@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import filmProp from '../film.prop';
 
@@ -41,7 +42,7 @@ function DetailsTab({film}) {
 }
 
 DetailsTab.propTypes = {
-  film: filmProp,
+  film: PropTypes.shape(filmProp).isRequired,
 };
 
 export default DetailsTab;

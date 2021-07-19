@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+
 import OverviewTab from './overview-tab';
 import DetailsTab from './details-tab';
 import ReviewsTab from './reviews-tab';
 
 import filmProp from '../film.prop';
+import reviewProp from '../review.prop.js';
 import {FilmTab} from '../../../const.js';
-import {reviews} from '../../../mocks/reviews.js';
 
-function Tabs({film}) {
+function Tabs({film, reviews}) {
   const [activeTab, setActiveTab] = useState(FilmTab.OVERVIEW);
   const tabs = Object.values(FilmTab);
 
@@ -35,7 +37,8 @@ function Tabs({film}) {
 }
 
 Tabs.propTypes = {
-  film: filmProp,
+  film: PropTypes.shape(filmProp).isRequired,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 export default Tabs;
