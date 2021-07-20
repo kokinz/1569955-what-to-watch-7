@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import filmProp from '../film-page/film.prop';
+import {fetchFavoriteFilms} from '../../store/api-actions';
+import {getFavoriteFilms} from '../../store/films-data/selectors';
 
 import Logo from '../logo/logo';
 import UserAvatar from '../user-avatar/user-avatar';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 
-function MyListPage({films}) {
-  const filteredFilms = films.slice().filter((film) => film.isFavorite);
+function MyListPage({favoriteFilms, loadData}) {
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   return (
     <div className="user-page">
@@ -21,7 +27,7 @@ function MyListPage({films}) {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
-          <FilmList films={filteredFilms}></FilmList>
+          <FilmList films={favoriteFilms}></FilmList>
         </div>
       </section>
       <Footer />
@@ -30,7 +36,19 @@ function MyListPage({films}) {
 }
 
 MyListPage.propTypes = {
-  films: PropTypes.arrayOf(filmProp).isRequired,
+  favoriteFilms: PropTypes.arrayOf(filmProp).isRequired,
+  loadData: PropTypes.func.isRequired,
 };
 
-export default MyListPage;
+const mapStateToProps = (state) => ({
+  favoriteFilms: getFavoriteFilms(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadData() {
+    dispatch(fetchFavoriteFilms());
+  },
+});
+
+export {MyListPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MyListPage);

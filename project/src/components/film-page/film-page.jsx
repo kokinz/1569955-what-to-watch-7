@@ -14,6 +14,7 @@ import {getReviews} from '../../store/reviews-data/selectors.js';
 
 import Logo from '../logo/logo';
 import UserAvatar from '../user-avatar/user-avatar';
+import MyListButton from '../my-list-button/my-list-button';
 import Tabs from './tabs/tabs';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
@@ -57,12 +58,7 @@ function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) 
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={() => history.push('/mylist/')}>
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref={film.isFavorite ? '#in-list' : '#add'} />
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <MyListButton film={film} />
                 {checkAuthorized(authorizationStatus) ? <Link className="btn film-card__button" to={generatePath('/films/:id/review', {id: filmId})}>Add review</Link> : ''}
               </div>
             </div>

@@ -3,7 +3,9 @@ const ActionType = {
   GET_FILMS_BY_GENRE: 'filmsByGenre',
   LOAD_FILMS: 'loadFilms',
   LOAD_FILM: 'loadFilm',
+  LOAD_PROMO_FILM: 'loadPromoFilm',
   LOAD_SIMILAR_FILMS: 'loadSimilarFilms',
+  LOAD_FAVORITE_FILMS: 'loadFavoriteFilms',
   LOAD_REVIEWS: 'loadReviews',
   REQUIRED_AUTHORIZATION: 'requiredAuthorization',
   LOGOUT: 'logout',
@@ -29,8 +31,18 @@ const loadFilm = (film) => ({
   payload: film,
 });
 
+const loadPromoFilm = (film) => ({
+  type: ActionType.LOAD_PROMO_FILM,
+  payload: film,
+});
+
 const loadSimilarFilms = (films) => ({
   type: ActionType.LOAD_SIMILAR_FILMS,
+  payload: films,
+});
+
+const loadFavoriteFilms = (films) => ({
+  type: ActionType.LOAD_FAVORITE_FILMS,
   payload: films,
 });
 
@@ -53,4 +65,4 @@ const redirectToRoute = (url) => ({
   payload: url,
 });
 
-export {ActionType, changeGenre, getFilmsByGenre, loadFilms, loadFilm, loadSimilarFilms, loadReviews, requireAuthorization, logout, redirectToRoute};
+export {ActionType, changeGenre, getFilmsByGenre, loadFilms, loadFilm, loadPromoFilm, loadSimilarFilms, loadFavoriteFilms, loadReviews, requireAuthorization, logout, redirectToRoute};

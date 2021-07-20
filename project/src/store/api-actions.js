@@ -1,4 +1,4 @@
-import {loadFilms, redirectToRoute, loadFilm, loadSimilarFilms, loadReviews, requireAuthorization, logout as closeSession} from './action';
+import {loadFilms, redirectToRoute, loadFilm, loadPromoFilm, loadSimilarFilms, loadReviews, requireAuthorization, logout as closeSession, loadFavoriteFilms} from './action';
 import {AuthorizationStatus, APIRoute, AppRoute} from '../const.js';
 import {adaptFilmsToClient, adaptFilmToClient} from '../services/adapter.js';
 
@@ -13,9 +13,20 @@ const fetchFilm = (id) => (dispatch, _getState, api) => (
     .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
+const fetchPromoFilm = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.PROMO)
+    .then(({data}) => dispatch(loadPromoFilm(adaptFilmToClient(data))))
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
+);
+
 const fetchSimilarFilms = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.FILMS}/${id}${APIRoute.SIMILAR}`)
     .then(({data}) => dispatch(loadSimilarFilms(adaptFilmsToClient(data))))
+);
+
+const fetchFavoriteFilms = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => dispatch(loadFavoriteFilms(adaptFilmsToClient(data))))
 );
 
 const fetchReviews = (id) => (dispatch, _getState, api) => (
@@ -27,6 +38,12 @@ const postReview = ({id, rating, comment}) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, {rating, comment})
     .then(({data}) => dispatch(loadReviews(data)))
     .then(() => dispatch(redirectToRoute(`${APIRoute.FILMS}/${id}`)))
+);
+
+const postFavorite = ({id, state}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/${state}`)
+    .then(({data}) => dispatch(loadFilm(adaptFilmToClient(data))))
+    .catch(() => {})
 );
 
 const checkAuth = () => (dispatch, _getState, api) => (
@@ -47,4 +64,4 @@ const logout = () => (dispatch, _getState, api) => (
     .then(() => dispatch(closeSession()))
 );
 
-export {fetchFilmsList, fetchFilm, fetchSimilarFilms, fetchReviews, postReview, checkAuth, login, logout};
+export {fetchFilmsList, fetchFilm, fetchPromoFilm, fetchSimilarFilms, fetchFavoriteFilms, fetchReviews, postReview, postFavorite, checkAuth, login, logout};
