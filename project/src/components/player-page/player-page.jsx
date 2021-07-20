@@ -24,7 +24,7 @@ function PlayerPage({films}) {
   const isPlaying = playerState.isPlaying;
   const duration = film.runTime;
 
-  const {elapsedTime} = useElapsedTime({duration, isPlaying });
+  const {elapsedTime} = useElapsedTime({duration: duration*60, isPlaying });
   const remainingTime = Math.ceil((duration*60) - elapsedTime);
 
   const getFormatRemainingTime = (time) => {
