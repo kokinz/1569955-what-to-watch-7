@@ -4,6 +4,8 @@ import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import {getAuthorizationStatus} from '../../store/user-data/selectors.js';
+
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
 
@@ -61,7 +63,7 @@ SignInPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

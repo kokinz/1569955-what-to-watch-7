@@ -4,10 +4,13 @@ import {generatePath} from 'react-router';
 import {useParams, useHistory, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-
 import filmProp from '../film-page/film.prop';
 import reviewProp from '../film-page/review.prop';
 import {fetchFilm, fetchSimilarFilms, fetchReviews} from '../../store/api-actions';
+
+import {getFilm, getSimilarFilms} from '../../store/films-data/selectors.js';
+import {getAuthorizationStatus} from '../../store/user-data/selectors.js';
+import {getReviews} from '../../store/reviews-data/selectors.js';
 
 import Logo from '../logo/logo';
 import UserAvatar from '../user-avatar/user-avatar';
@@ -76,7 +79,7 @@ function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) 
       </section>
       <div className="page-content">
         <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
+          {likeThisFilms.length ? <h2 className="catalog__title">More like this</h2> : ''}
           <div className="catalog__films-list">
             <FilmList films={likeThisFilms}></FilmList>
           </div>
@@ -96,10 +99,10 @@ FilmPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  film: state.film,
-  similarFilms: state.similarFilms,
-  reviews: state.reviews,
-  authorizationStatus: state.authorizationStatus,
+  film: getFilm(state),
+  similarFilms: getSimilarFilms(state),
+  reviews: getReviews(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

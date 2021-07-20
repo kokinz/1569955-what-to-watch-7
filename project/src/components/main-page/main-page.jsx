@@ -2,7 +2,9 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {changeGenre, getFilmsByGenre} from '../../store/action.js';
+
+import {getGenre, getFilms, getFilmsByGenres} from '../../store/films-data/selectors.js';
 
 import filmProp from '../film-page/film.prop';
 
@@ -103,15 +105,15 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  genre: state.genre,
-  films: state.films,
-  filmsByGenre: state.filmsByGenre,
+  genre: getGenre(state),
+  films: getFilms(state),
+  filmsByGenre: getFilmsByGenres(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
-    dispatch(ActionCreator.getFilmsByGenre());
+    dispatch(changeGenre(genre));
+    dispatch(getFilmsByGenre());
   },
 });
 

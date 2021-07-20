@@ -3,6 +3,8 @@ import {Link, useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import {getAuthorizationStatus} from '../../store/user-data/selectors.js';
+
 import {checkAuthorized} from '../../utils.js';
 import {logout} from '../../store/api-actions';
 import {AppRoute} from '../../const.js';
@@ -40,7 +42,7 @@ UserAvatar.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
