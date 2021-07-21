@@ -31,6 +31,8 @@ const APIRoute = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   SIMILAR: '/similar',
+  FAVORITE: '/favorite',
+  PROMO: '/promo',
   COMMENTS: '/comments',
 };
 
