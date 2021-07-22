@@ -20,6 +20,7 @@ const createAPI = (onUnauthorized) => {
 
   const onSuccess = (response) => {
     const {data} = response;
+
     if (data.token) {
       api.defaults.headers.common['X-token'] = data.token;
     }
