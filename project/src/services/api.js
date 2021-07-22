@@ -18,7 +18,15 @@ const createAPI = (onUnauthorized) => {
     },
   });
 
-  const onSuccess = (response) => response;
+  const onSuccess = (response) => {
+    const {data} = response;
+
+    if (data.token) {
+      api.defaults.headers.common['X-token'] = data.token;
+    }
+
+    return response;
+  };
 
   const onFail = (err) => {
     const {response} = err;

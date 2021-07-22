@@ -27,9 +27,11 @@ function MyListButton({film, authorizationStatus, onSubmit}) {
 
         return !prevState;
       });
-    } else {
-      history.push(AppRoute.LOGIN);
+
+      return;
     }
+
+    history.push(AppRoute.LOGIN);
   };
 
   return (
