@@ -78,7 +78,45 @@ describe('Async operations', () => {
 
     apiMock
       .onGet(`${APIRoute.FILMS}/${id}`)
-      .reply(200, [{fake: true}]);
+      .reply(200, {fake: true});
+
+    return filmsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.REDIRECT_TO_ROUTE,
+          payload: '/404',
+        });
+      });
+  });
+
+  it('should make a correct API call to GET /promo', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const filmsLoader = fetchFilm();
+
+    apiMock
+      .onGet(APIRoute.PROMO)
+      .reply(200, {fake: true});
+
+    return filmsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.REDIRECT_TO_ROUTE,
+          payload: '/404',
+        });
+      });
+  });
+
+  it('should make a correct API call to GET /similar', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const filmsLoader = fetchFilmsList();
+
+    apiMock
+      .onGet('/films/:3/similar')
+      .reply(200, 'quoteDetailsData', [{fake: true}]);
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
@@ -86,10 +124,6 @@ describe('Async operations', () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
           payload: [adaptFilmToClient({fake: true})],
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.REDIRECT_TO_ROUTE,
-          payload: '/404',
         });
       });
   });
