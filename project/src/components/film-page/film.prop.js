@@ -10,6 +10,7 @@ export default PropTypes.shape({
   videoLink: PropTypes.string.isRequired,
   previewVideoLink: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   scoresCount: PropTypes.number.isRequired,
   director: PropTypes.string.isRequired,
   starring: PropTypes.array.isRequired,

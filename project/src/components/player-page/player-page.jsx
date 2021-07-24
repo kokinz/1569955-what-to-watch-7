@@ -1,10 +1,13 @@
 import React, {useRef, useState} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import {useElapsedTime} from 'use-elapsed-time';
+import Moment from 'react-moment';
 
 import PropTypes from 'prop-types';
 import filmProp from '../film-page/film.prop';
 import {APIRoute} from '../../const.js';
+
+const ESCAPE_BUTTON = 'Escape';
 
 function PlayerPage({films}) {
   const filmId = parseInt(useParams().id, 10);
@@ -27,14 +30,6 @@ function PlayerPage({films}) {
   const {elapsedTime} = useElapsedTime({duration: duration*60, isPlaying });
   const remainingTime = Math.ceil((duration*60) - elapsedTime);
 
-  const getFormatRemainingTime = (time) => {
-    const hours = time/60/60 < 10 ? `0${Math.floor(time/60/60)}` : Math.floor(time/60/60);
-    const minutes = time/60 - hours*60 < 10 ? `0${Math.floor(time/60 - hours*60 < 10)}` : Math.floor(time/60 - hours*60);
-    const seconds = time - hours*60*60 - minutes*60 < 10 ? `0${time - hours*60*60 - minutes*60}` : time - hours*60*60 - minutes*60;
-
-    return `-${hours}:${minutes}:${seconds}`;
-  };
-
   const onPlayClick = (evt) => {
     evt.preventDefault();
 
@@ -50,7 +45,7 @@ function PlayerPage({films}) {
   };
 
   const onEscapeKeydown = (evt) => {
-    if (evt.key === 'Escape') {
+    if (evt.key === ESCAPE_BUTTON) {
       evt.preventDefault();
 
       setPlayerState((prevState) => ({...prevState, isFullScreen: false}));
@@ -79,7 +74,11 @@ function PlayerPage({films}) {
                 <progress className="player__progress" value={30} max={100} />
                 <div className="player__toggler" style={{left: `${Math.floor((elapsedTime/(duration*60)*100))}`}}>Toggler</div>
               </div>
-              <div className="player__time-value">{`${getFormatRemainingTime(remainingTime)}`}</div>
+              <div className="player__time-value">
+                <Moment unix format="-HH:mm:ss">
+                  {remainingTime}
+                </Moment>
+              </div>
             </div>
             <div className="player__controls-row">
               <button ref={playButton} type="button" className="player__play" onClick={onPlayClick}>

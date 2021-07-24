@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import {AppRoute, AuthorizationStatus} from '../../const';
 import filmProp from '../film-page/film.prop';
-import browserHistory from '../../browser-history.js';
 
 import {getFilms, getLoadedDataStatus} from '../../store/films-data/selectors.js';
 import {getAuthorizationStatus} from '../../store/user-data/selectors.js';
@@ -28,41 +27,39 @@ function App({films, authorizationStatus, isDataLoaded}) {
   }
 
   return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route exact path={AppRoute.MAIN}>
-          <MainPage />
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <SignInPage />
-        </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.MY_LIST}
-          render={() => <MyListPage films={films} />}
-        >
-        </PrivateRoute>
-        <Route exact path={AppRoute.FILM}>
-          <FilmPage
-            films={films}
-          />
-        </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.ADD_REVIEW}
-          render={() => <AddReviewPage films={films} />}
-        >
-        </PrivateRoute>
-        <Route exact path={AppRoute.PLAYER}>
-          <PlayerPage
-            films={films}
-          />
-        </Route>
-        <Route>
-          <NotFounfPage path={AppRoute.NOT_FOUND}/>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path={AppRoute.MAIN}>
+        <MainPage />
+      </Route>
+      <Route exact path={AppRoute.LOGIN}>
+        <SignInPage />
+      </Route>
+      <PrivateRoute
+        exact
+        path={AppRoute.MY_LIST}
+        render={() => <MyListPage films={films} />}
+      >
+      </PrivateRoute>
+      <Route exact path={AppRoute.FILM}>
+        <FilmPage
+          films={films}
+        />
+      </Route>
+      <PrivateRoute
+        exact
+        path={AppRoute.ADD_REVIEW}
+        render={() => <AddReviewPage films={films} />}
+      >
+      </PrivateRoute>
+      <Route exact path={AppRoute.PLAYER}>
+        <PlayerPage
+          films={films}
+        />
+      </Route>
+      <Route>
+        <NotFounfPage path={AppRoute.NOT_FOUND}/>
+      </Route>
+    </Switch>
   );
 }
 
