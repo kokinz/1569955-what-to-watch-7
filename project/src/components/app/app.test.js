@@ -4,7 +4,7 @@ import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, AppRoute} from '../../const';
 import App from './app';
 
 let history = null;
@@ -28,16 +28,25 @@ const films = [{
   runTime: 153,
   genre: 'Crime',
   released: 1994,
-  isFavorite: false,
+  isFavorite: true,
 }];
+
+jest.mock('../film-list/film-list', () => {
+  const mockFilmsList = () => <>This is mock Films list</>;
+  return {
+    __esModule: true,
+    default: mockFilmsList,
+  };
+});
 
 describe('Application Routing', () => {
   beforeAll(() => {
     history = createMemoryHistory();
 
     const createFakeStore = configureStore({});
+
     store = createFakeStore({
-      USER_DATA: {authorizationStatus: AuthorizationStatus.AUTH},
+      USER_DATA: {authorizationStatus: AuthorizationStatus.NO_AUTH},
       FILMS_DATA: {genre: 'All genres', films: films, favoriteFilms: films, promoFilm: {...films}, filmsByGenre: films, isDataLoaded: true},
       REVIEWS_DATA: {},
     });
@@ -51,30 +60,49 @@ describe('Application Routing', () => {
     );
   });
 
-  // it('should render "MainPage" when user navigate to "/"', () => {
-  //   history.push(AppRoute.MAIN);
-  //   render(fakeApp);
+  it('should render "MainPage" when user navigate to "/"', () => {
+    history.push(AppRoute.MAIN);
+    render(fakeApp);
 
-  //   expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
-  // });
+    expect(screen.getByText(/Catalog/i)).toBeInTheDocument();
+    expect(screen.getByText(/All genres/i)).toBeInTheDocument();
+    expect(screen.getByText(/Crime/i)).toBeInTheDocument();
+    expect(screen.getByText(/This is mock Films list/i)).toBeInTheDocument();
+  });
 
-  // it('should render "SignInPage" when user navigate to "/login"', () => {
-  //   history.push(AppRoute.LOGIN);
-  //   render(fakeApp);
+  it('should render "SignInPage" when user navigate to "/login"', () => {
+    history.push(AppRoute.LOGIN);
+    render(fakeApp);
 
-  //   expect(screen.getByText(/Email address/i)).toBeInTheDocument();
-  //   expect(screen.getByText(/Password/i)).toBeInTheDocument();
-  // });
+    expect(screen.getByText(/Email address/i)).toBeInTheDocument();
+    expect(screen.getByText(/Password/i)).toBeInTheDocument();
+  });
 
-  // it('should render "MyList" when user navigate to "/mylist"', () => {
-  //   history.push(AppRoute.MY_LIST);
-  //   render(fakeApp);
+  it('should render "MyList" when user navigate to "/mylist"', () => {
+    history.push(AppRoute.MY_LIST);
+    render(fakeApp);
 
-  //   expect(screen.getByText(/Email address/i)).toBeInTheDocument();
-  //   expect(screen.getByText(/Password/i)).toBeInTheDocument();
-  // });
+    expect(screen.getByText(/Email address/i)).toBeInTheDocument();
+    expect(screen.getByText(/Password/i)).toBeInTheDocument();
+  });
 
   it('should render "AddReview" when user navigate to "/films/:id/review"', () => {
+    const createFakeStore = configureStore({});
+
+    store = createFakeStore({
+      USER_DATA: {authorizationStatus: AuthorizationStatus.AUTH},
+      FILMS_DATA: {genre: 'All genres', films: films, favoriteFilms: films, promoFilm: {...films}, filmsByGenre: films, isDataLoaded: true},
+      REVIEWS_DATA: {},
+    });
+
+    fakeApp = (
+      <Provider store={store}>
+        <Router history={history}>
+          <App />
+        </Router>
+      </Provider>
+    );
+
     history.push('/films/1/review');
     render(fakeApp);
 
