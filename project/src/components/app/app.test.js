@@ -39,6 +39,14 @@ jest.mock('../film-list/film-list', () => {
   };
 });
 
+jest.mock('../my-list-page/my-list-page', () => {
+  const mockMyList= () => <>This is mock My list</>;
+  return {
+    __esModule: true,
+    default: mockMyList,
+  };
+});
+
 describe('Application Routing', () => {
   beforeAll(() => {
     history = createMemoryHistory();
@@ -79,20 +87,12 @@ describe('Application Routing', () => {
   });
 
   it('should render "MyList" when user navigate to "/mylist"', () => {
-    history.push(AppRoute.MY_LIST);
-    render(fakeApp);
-
-    expect(screen.getByText(/Email address/i)).toBeInTheDocument();
-    expect(screen.getByText(/Password/i)).toBeInTheDocument();
-  });
-
-  it('should render "AddReview" when user navigate to "/films/:id/review"', () => {
     const createFakeStore = configureStore({});
 
     store = createFakeStore({
       USER_DATA: {authorizationStatus: AuthorizationStatus.AUTH},
-      FILMS_DATA: {genre: 'All genres', films: films, favoriteFilms: films, promoFilm: {...films}, filmsByGenre: films, isDataLoaded: true},
-      REVIEWS_DATA: {},
+      FILMS_DATA: store.getState().FILMS_DATA,
+      REVIEWS_DATA: store.getState().REVIEWS_DATA,
     });
 
     fakeApp = (
@@ -103,6 +103,13 @@ describe('Application Routing', () => {
       </Provider>
     );
 
+    history.push(AppRoute.MY_LIST);
+    render(fakeApp);
+
+    expect(screen.getByText(/This is mock My list/i)).toBeInTheDocument();
+  });
+
+  it('should render "AddReview" when user navigate to "/films/:id/review"', () => {
     history.push('/films/1/review');
     render(fakeApp);
 
