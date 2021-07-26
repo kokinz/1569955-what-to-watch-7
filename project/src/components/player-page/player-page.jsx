@@ -64,7 +64,7 @@ function PlayerPage({films}) {
 
   return (
     <div className="player">
-      <video ref={player} src={film.videoLink} className="player__video" poster={film.posterImage}/>
+      <video ref={player} src={film.videoLink} className="player__video" poster={film.posterImage} />
       {playerState.isFullScreen ? '' :
         <>
           <button type="button" className="player__exit" onClick={() => history.push(`${APIRoute.FILMS}/${filmId}`)}>Exit</button>
