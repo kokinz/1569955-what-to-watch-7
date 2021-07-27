@@ -37,7 +37,7 @@ function MyListButton({film, authorizationStatus, onSubmit}) {
   return (
     <button className="btn btn--list film-card__button" type="button" onClick={handleMyListButtonClick}>
       <svg viewBox="0 0 19 20" width="19" height="20">
-        <use xlinkHref={isFavorite ? '#in-list' : '#add'}></use>
+        <use xlinkHref={isFavorite && authorizationStatus === AuthorizationStatus.AUTH ? '#in-list' : '#add'}></use>
       </svg>
       <span>My list</span>
     </button>
