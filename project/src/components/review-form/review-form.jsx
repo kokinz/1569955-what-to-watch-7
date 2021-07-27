@@ -89,7 +89,7 @@ function ReviewForm({id, onSubmit}) {
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} maxLength={COMMENT_MAX_LENGTH} onInput={handleTextChange} disabled={data.isFormDisabled}/>
+        <textarea className="add-review__textarea" name="review-text" id="review-text" cols={30} placeholder="Review text" value={comment} maxLength={COMMENT_MAX_LENGTH} onInput={handleTextChange} disabled={data.isFormDisabled}/>
         <div className="add-review__submit">
           {data.isSubmitError ? <p style={{color: '#FF0000'}}>Ошибка отправки отзыва</p> : <button className="add-review__btn" type="submit" disabled={data.isButtonDisabled || data.isFormDisabled}>Post</button>}
         </div>

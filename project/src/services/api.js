@@ -5,6 +5,7 @@ const REQUEST_TIMEOUT = 5000;
 
 const HttpCode = {
   UNAUTHORIZED: 401,
+  DELETE: 204,
 };
 
 const createAPI = (onUnauthorized) => {
@@ -24,6 +25,11 @@ const createAPI = (onUnauthorized) => {
     if (data.token) {
       api.defaults.headers.common['X-token'] = data.token;
       localStorage.setItem('token', data.token);
+    }
+
+    if (response.status === HttpCode.DELETE) {
+      api.defaults.headers.common['X-token'] = '';
+      localStorage.removeItem('token');
     }
 
     return response;
