@@ -1,15 +1,15 @@
 const ActionType = {
-  CHANGE_GENRE: 'changeGenre',
-  GET_FILMS_BY_GENRE: 'filmsByGenre',
-  LOAD_FILMS: 'loadFilms',
-  LOAD_FILM: 'loadFilm',
-  LOAD_PROMO_FILM: 'loadPromoFilm',
-  LOAD_SIMILAR_FILMS: 'loadSimilarFilms',
-  LOAD_FAVORITE_FILMS: 'loadFavoriteFilms',
-  LOAD_REVIEWS: 'loadReviews',
-  REQUIRED_AUTHORIZATION: 'requiredAuthorization',
-  LOGOUT: 'logout',
-  REDIRECT_TO_ROUTE: 'redirectToRoute',
+  CHANGE_GENRE: 'films/changeGenre',
+  GET_FILMS_BY_GENRE: 'films/filmsByGenre',
+  LOAD_FILMS: 'films/loadFilms',
+  LOAD_FILM: 'films/loadFilm',
+  LOAD_PROMO_FILM: 'films/loadPromoFilm',
+  LOAD_SIMILAR_FILMS: 'films/loadSimilarFilms',
+  LOAD_FAVORITE_FILMS: 'films/loadFavoriteFilms',
+  LOAD_REVIEWS: 'reviews/loadReviews',
+  REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
+  LOGOUT: 'user/logout',
+  REDIRECT_TO_ROUTE: 'common/redirectToRoute',
 };
 
 const changeGenre = (genre) => ({

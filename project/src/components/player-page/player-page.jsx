@@ -5,12 +5,12 @@ import Moment from 'react-moment';
 
 import PropTypes from 'prop-types';
 import filmProp from '../film-page/film.prop';
-import {APIRoute} from '../../const.js';
+import {APIRoute, ROUNDING_INTEGER} from '../../const.js';
 
 const ESCAPE_BUTTON = 'Escape';
 
 function PlayerPage({films}) {
-  const filmId = parseInt(useParams().id, 10);
+  const filmId = parseInt(useParams().id, ROUNDING_INTEGER);
   const film = films.find((movie) => (movie.id === filmId));
 
   const history = useHistory();

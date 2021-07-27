@@ -20,11 +20,11 @@ import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 import LoadingScreen from '../loading-screen/loading-screen.jsx';
 
-import {LIKE_THIS_FILMS_COUNT} from '../../const.js';
+import {LIKE_THIS_FILMS_COUNT, ROUNDING_INTEGER} from '../../const.js';
 import {checkAuthorized} from '../../utils.js';
 
 function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) {
-  const filmId = parseInt(useParams().id, 10);
+  const filmId = parseInt(useParams().id, ROUNDING_INTEGER);
   const history = useHistory();
 
   const likeThisFilms = similarFilms.filter((movie) => movie.id !== filmId).slice(0, LIKE_THIS_FILMS_COUNT);

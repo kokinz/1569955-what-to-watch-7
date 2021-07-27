@@ -8,9 +8,10 @@ import filmProp from '../film-page/film.prop';
 import Logo from '../logo/logo';
 import UserAvatar from '../user-avatar/user-avatar';
 import ReviewForm from '../review-form/review-form';
+import ROUNDING_INTEGER from '../../const';
 
 function AddReviewPage({films}) {
-  const filmId = parseInt(useParams().id, 10);
+  const filmId = parseInt(useParams().id, ROUNDING_INTEGER);
   const film = films.find((movie) => (movie.id === filmId));
 
   return (
