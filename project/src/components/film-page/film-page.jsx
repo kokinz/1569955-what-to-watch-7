@@ -31,11 +31,11 @@ function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) 
 
   useEffect(() => {
     loadData(filmId);
-  }, [filmId, loadData]);
 
-  if (filmId !== film.id) {
-    return (<LoadingScreen />);
-  }
+    if (filmId !== film.id) {
+      return (<LoadingScreen />);
+    }
+  }, [filmId, film.id, loadData]);
 
   return (
     <>

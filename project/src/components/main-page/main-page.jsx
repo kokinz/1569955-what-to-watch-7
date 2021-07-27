@@ -30,15 +30,15 @@ function MainPage({loadPromo, films, genre, onGenreChange, filmsByGenre, promoFi
 
   useEffect(() => {
     loadPromo();
-  }, [loadPromo]);
+
+    if (!promoFilm.id) {
+      return (<LoadingScreen />);
+    }
+  }, [loadPromo, promoFilm.id]);
 
   const handleShowMoreClick = () => {
     setShownFilmsCount(shownFilmsCount + SHOW_MORE_FILMS_COUNT);
   };
-
-  if (!promoFilm.id) {
-    return (<LoadingScreen />);
-  }
 
   return (
     <>

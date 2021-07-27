@@ -47,6 +47,14 @@ jest.mock('../my-list-page/my-list-page', () => {
   };
 });
 
+jest.mock('../../store/api-actions', () => {
+  const mockFetch = () => ({type: 'loadFilm', payload: {...films}});
+  return {
+    __esModule: true,
+    fetchPromoFilm: mockFetch,
+  };
+});
+
 describe('Application Routing', () => {
   beforeAll(() => {
     history = createMemoryHistory();
@@ -55,7 +63,7 @@ describe('Application Routing', () => {
 
     store = createFakeStore({
       USER_DATA: {authorizationStatus: AuthorizationStatus.NO_AUTH},
-      FILMS_DATA: {genre: 'All genres', films: films, favoriteFilms: films, promoFilm: {...films}, filmsByGenre: films, isDataLoaded: true},
+      FILMS_DATA: {genre: 'All genres', films: films, favoriteFilms: films, promoFilm: {...films}, film: {...films}, filmsByGenre: films, isDataLoaded: true},
       REVIEWS_DATA: {},
     });
 

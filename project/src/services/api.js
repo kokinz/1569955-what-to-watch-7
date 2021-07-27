@@ -22,14 +22,16 @@ const createAPI = (onUnauthorized) => {
   const onSuccess = (response) => {
     const {data} = response;
 
-    if (data.token) {
+    if (data.token && !localStorage.getItem('token')) {
       api.defaults.headers.common['X-token'] = data.token;
+
       localStorage.setItem('token', data.token);
     }
 
     if (response.status === HttpCode.DELETE) {
       api.defaults.headers.common['X-token'] = '';
-      localStorage.removeItem('token');
+
+      localStorage.setItem('token', '');
     }
 
     return response;
