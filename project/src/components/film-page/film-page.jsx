@@ -18,6 +18,7 @@ import MyListButton from '../my-list-button/my-list-button';
 import Tabs from './tabs/tabs';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
+import LoadingScreen from '../loading-screen/loading-screen.jsx';
 
 import {LIKE_THIS_FILMS_COUNT} from '../../const.js';
 import {checkAuthorized} from '../../utils.js';
@@ -31,6 +32,10 @@ function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) 
   useEffect(() => {
     loadData(filmId);
   }, [filmId, loadData]);
+
+  if (filmId !== film.id) {
+    return (<LoadingScreen />);
+  }
 
   return (
     <>

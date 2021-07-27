@@ -16,6 +16,7 @@ import GenreList from '../genre-list/genre-list';
 import FilmList from '../film-list/film-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import Footer from '../footer/footer';
+import LoadingScreen from '../loading-screen/loading-screen.jsx';
 
 import {SHOW_MORE_FILMS_COUNT} from '../../const.js';
 
@@ -34,6 +35,10 @@ function MainPage({loadPromo, films, genre, onGenreChange, filmsByGenre, promoFi
   const handleShowMoreClick = () => {
     setShownFilmsCount(shownFilmsCount + SHOW_MORE_FILMS_COUNT);
   };
+
+  if (!promoFilm.id) {
+    return (<LoadingScreen />);
+  }
 
   return (
     <>

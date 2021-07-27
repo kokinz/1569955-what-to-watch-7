@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 
 import PropTypes from 'prop-types';
@@ -17,8 +17,33 @@ function SignInPage({authorizationStatus, onSubmit}) {
   const loginRef = useRef();
   const passwordRef = useRef();
 
+  const [data, setData] = useState({
+    isEmailError: false,
+    isPasswordError: false,
+  });
+
   const handleSubmit = (evt) => {
+    const rex = /^[\w-.]+@[\w-]+\.[a-z]{2,4}$/i;
+
     evt.preventDefault();
+
+    if (!rex.test(loginRef.current.value)) {
+      setData({
+        ...data,
+        isEmailError: true,
+      });
+
+      return;
+    }
+
+    if (passwordRef.current.value.trim().length === 0) {
+      setData({
+        ...data,
+        isPasswordError: true,
+      });
+
+      return;
+    }
 
     onSubmit({
       login: loginRef.current.value,
@@ -37,6 +62,8 @@ function SignInPage({authorizationStatus, onSubmit}) {
         </header>
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form">
+            {data.isEmailError ? <div className="sign-in__message"><p>Please enter a valid email address</p></div> : ''}
+            {data.isPasswordError ? <div className="sign-in__message"><p>We can’t recognize this email <br /> and password combination. Please try again.</p></div> : ''}
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input ref={loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" data-testid="login" />
