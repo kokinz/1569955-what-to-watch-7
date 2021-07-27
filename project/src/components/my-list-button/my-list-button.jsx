@@ -16,7 +16,7 @@ function MyListButton({film, authorizationStatus, onSubmit}) {
     setIsFavorite(film.isFavorite);
   }, [film]);
 
-  const onMyListButtonClick = (evt) => {
+  const handleMyListButtonClick = (evt) => {
     evt.preventDefault();
 
     if (authorizationStatus === AuthorizationStatus.AUTH) {
@@ -35,7 +35,7 @@ function MyListButton({film, authorizationStatus, onSubmit}) {
   };
 
   return (
-    <button className="btn btn--list film-card__button" type="button" onClick={onMyListButtonClick}>
+    <button className="btn btn--list film-card__button" type="button" onClick={handleMyListButtonClick}>
       <svg viewBox="0 0 19 20" width="19" height="20">
         <use xlinkHref={isFavorite ? '#in-list' : '#add'}></use>
       </svg>

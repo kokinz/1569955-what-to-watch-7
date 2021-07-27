@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ShowMoreButton({handleShowMoreClick}) {
+function ShowMoreButton({onShowMoreClick}) {
   return (
-    <button className="catalog__button" type="button" onClick={handleShowMoreClick}>Show more</button>
+    <button className="catalog__button" type="button" onClick={onShowMoreClick}>Show more</button>
   );
 }
 
 ShowMoreButton.propTypes = {
-  handleShowMoreClick: PropTypes.func.isRequired,
+  onShowMoreClick: PropTypes.func.isRequired,
 };
 
 export default ShowMoreButton;

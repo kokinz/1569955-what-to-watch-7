@@ -5,7 +5,7 @@ import filmProp from '../film-page/film.prop';
 import {getGenresList} from '../../utils.js';
 
 function GenreList({films, currentGenre, onGenreChange}) {
-  const onGenreClick = (evt) => {
+  const handleGenreClick = (evt) => {
     evt.preventDefault();
 
     onGenreChange(evt.target.textContent);
@@ -15,7 +15,7 @@ function GenreList({films, currentGenre, onGenreChange}) {
     <ul className="catalog__genres-list">
       {getGenresList(films).map((genre, index) => (
         <li key ={genre} className={(genre === currentGenre) ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}>
-          <a href="/" className="catalog__genres-link" onClick={onGenreClick}>{genre}</a>
+          <a href="/" className="catalog__genres-link" onClick={handleGenreClick}>{genre}</a>
         </li>
       ))}
     </ul>

@@ -30,7 +30,7 @@ function PlayerPage({films}) {
   const {elapsedTime} = useElapsedTime({duration: duration*60, isPlaying });
   const remainingTime = Math.ceil((duration*60) - elapsedTime);
 
-  const onPlayClick = (evt) => {
+  const handlePlayClick = (evt) => {
     evt.preventDefault();
 
     if(player.current.paused) {
@@ -44,22 +44,22 @@ function PlayerPage({films}) {
     }
   };
 
-  const onEscapeKeydown = (evt) => {
+  const handleEscapeKeydown = (evt) => {
     if (evt.key === ESCAPE_BUTTON) {
       evt.preventDefault();
 
       setPlayerState((prevState) => ({...prevState, isFullScreen: false}));
 
-      document.removeEventListener('keydown', onEscapeKeydown);
+      document.removeEventListener('keydown', handleEscapeKeydown);
     }
   };
 
-  const onFullScreenClick = (evt) => {
+  const handleFullScreenClick = (evt) => {
     evt.preventDefault();
 
     setPlayerState((prevState) => ({...prevState, isFullScreen: true}));
 
-    document.addEventListener('keydown', onEscapeKeydown);
+    document.addEventListener('keydown', handleEscapeKeydown);
   };
 
   return (
@@ -81,14 +81,14 @@ function PlayerPage({films}) {
               </div>
             </div>
             <div className="player__controls-row">
-              <button ref={playButton} type="button" className="player__play" onClick={onPlayClick}>
+              <button ref={playButton} type="button" className="player__play" onClick={handlePlayClick}>
                 <svg viewBox="0 0 19 19" width={19} height={19}>
                   <use xlinkHref={playerState.isPlaying ? '#pause' : '#play-s'}/>
                 </svg>
                 <span>Play</span>
               </button>
               <div className="player__name">{film.name}</div>
-              <button ref={fullScreenButton} type="button" className="player__full-screen" onClick={onFullScreenClick}>
+              <button ref={fullScreenButton} type="button" className="player__full-screen" onClick={handleFullScreenClick}>
                 <svg viewBox="0 0 27 27" width={27} height={27}>
                   <use xlinkHref="#full-screen" />
                 </svg>

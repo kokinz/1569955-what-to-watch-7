@@ -93,7 +93,7 @@ function MainPage({loadPromo, films, genre, onGenreChange, filmsByGenre, promoFi
           </div>
 
           <div className="catalog__more">
-            {shownFilmsCount < filmsByGenre.length ? <ShowMoreButton handleShowMoreClick={handleShowMoreClick} /> : ''}
+            {shownFilmsCount < filmsByGenre.length ? <ShowMoreButton onShowMoreClick={handleShowMoreClick} /> : ''}
           </div>
         </section>
 
