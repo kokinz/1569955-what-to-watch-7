@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Moment from 'react-moment';
 
 import reviewProp from '../review.prop.js';
@@ -14,7 +15,7 @@ function ReviewsTab({reviews}) {
               <p className="review__text">{review.comment}</p>
               <footer className="review__details">
                 <cite className="review__author">{review.user.name}</cite>
-                <time className="review__date" dateTime="2016-12-24">
+                <time className="review__date" dateTime={moment(review.date).format('YYYY-MM-DD')}>
                   <Moment format="MMMM D, YYYY">
                     {review.date}
                   </Moment>
@@ -32,7 +33,7 @@ function ReviewsTab({reviews}) {
               <p className="review__text">{review.comment}</p>
               <footer className="review__details">
                 <cite className="review__author">{review.user.name}</cite>
-                <time className="review__date" dateTime="2016-12-24">
+                <time className="review__date" dateTime={moment(review.date).format('YYYY-MM-DD')}>
                   <Moment format="MMMM D, YYYY">
                     {review.date}
                   </Moment>

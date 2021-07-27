@@ -8,7 +8,7 @@ import filmProp from '../film-page/film.prop';
 import Logo from '../logo/logo';
 import UserAvatar from '../user-avatar/user-avatar';
 import ReviewForm from '../review-form/review-form';
-import ROUNDING_INTEGER from '../../const';
+import {ROUNDING_INTEGER} from '../../const';
 
 function AddReviewPage({films}) {
   const filmId = parseInt(useParams().id, ROUNDING_INTEGER);
