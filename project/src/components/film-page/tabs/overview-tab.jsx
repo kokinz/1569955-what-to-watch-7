@@ -2,21 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import filmProp from '../film.prop';
+import {RatingLevel} from '../../../const.js';
 
 const getLevel = (rating) => {
   if (Math.trunc(rating) === 10) {
-    return 'Awesome';
+    return RatingLevel.AWESOME;
   }
   if (Math.trunc(rating) >= 8) {
-    return 'Very good';
+    return RatingLevel.VERY_GOOD;
   }
   if (Math.trunc(rating) >= 5) {
-    return 'Good';
+    return RatingLevel.GOOD;
   }
   if (Math.trunc(rating) >= 3) {
-    return 'Normal';
+    return RatingLevel.NORMAL;
   }
-  return 'Bad';
+  return RatingLevel.BAD;
 };
 
 function OverviewTab({film}) {

@@ -8,6 +8,14 @@ const COMMENT_MIN_LENGTH = 50;
 const COMMENT_MAX_LENGTH = 400;
 const SUBMIT_ERROR_DELAY = 4500;
 
+const RatingLevel = {
+  AWESOME: 'Awesome',
+  VERY_GOOD: 'Very good',
+  GOOD: 'Good',
+  NORMAL: 'Normal',
+  BAD: 'Bad',
+};
+
 const AppRoute = {
   MAIN: '/',
   LOGIN: '/login',
@@ -41,6 +49,7 @@ const APIRoute = {
 };
 
 export {
+  RatingLevel,
   AppRoute,
   FilmTab,
   AuthorizationStatus,
