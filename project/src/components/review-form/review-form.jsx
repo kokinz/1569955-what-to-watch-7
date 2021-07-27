@@ -6,12 +6,15 @@ import {postReview} from '../../store/api-actions.js';
 
 import ReviewFormField from '../review-form-field/review-form-field';
 
-import {RATING_COUNT} from '../../const';
+import {RATING_COUNT, COMMENT_MAX_LENGTH, COMMENT_MIN_LENGTH, SUBMIT_ERROR_DELAY} from '../../const';
 
 function ReviewForm({id, onSubmit}) {
   const [data, setData] = useState({
     rating: 7,
     comment: '',
+    isButtonDisabled: true,
+    isFormDisabled: false,
+    isSubmitError: false,
   });
 
   const {rating, comment} = data;
@@ -24,20 +27,52 @@ function ReviewForm({id, onSubmit}) {
   };
 
   const handleTextChange = (evt) => {
+    const commentLength = evt.target.value.length;
+
+    if (commentLength >= COMMENT_MIN_LENGTH) {
+      setData({
+        ...data,
+        isButtonDisabled: false,
+        comment: evt.target.value,
+      });
+    } else {
+      setData({
+        ...data,
+        isButtonDisabled: true,
+        comment: evt.target.value,
+      });
+    }
+  };
+
+  const handleSubmitError = () => {
     setData({
       ...data,
-      comment: evt.target.value,
+      isSubmitError: true,
+      isFormDisabled: true,
     });
+
+    setTimeout(() => {
+      setData({
+        ...data,
+        isSubmitError: false,
+        isFormDisabled: false,
+      });
+    }, SUBMIT_ERROR_DELAY);
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
+    setData({
+      ...data,
+      isFormDisabled: true,
+    });
+
     onSubmit({
       id: id,
       rating: data.rating,
       comment: data.comment,
-    });
+    }, handleSubmitError);
   };
 
   return (
@@ -47,16 +82,16 @@ function ReviewForm({id, onSubmit}) {
           {Array.from({length: RATING_COUNT}).map((element, index) => {
             const keyValue = `${element}-${index}`;
             return (
-              <ReviewFormField index={RATING_COUNT - index} value={rating} handleRatingChange={handleRatingChange} key={keyValue}/>
+              <ReviewFormField index={RATING_COUNT - index} value={rating} handleRatingChange={handleRatingChange} isDisabled={data.isFormDisabled} key={keyValue}/>
             );
           })}
         </div>
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={handleTextChange}/>
+        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} maxLength={COMMENT_MAX_LENGTH} onInput={handleTextChange} disabled={data.isFormDisabled}/>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          {data.isSubmitError ? <p style={{color: '#FF0000'}}>Ошибка отправки отзыва</p> : <button className="add-review__btn" type="submit" disabled={data.isButtonDisabled || data.isFormDisabled}>Post</button>}
         </div>
       </div>
     </form>
@@ -69,8 +104,8 @@ ReviewForm.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(postReview(authData));
+  onSubmit(authData, handleSubmitError) {
+    dispatch(postReview(authData, handleSubmitError));
   },
 });
 

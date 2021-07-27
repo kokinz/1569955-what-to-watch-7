@@ -22,6 +22,7 @@ const filmsData = (state = initialState, action) => {
       return {
         ...state,
         films: action.payload,
+        isDataLoaded: true,
       };
     case ActionType.LOAD_FILM:
       return {
@@ -32,7 +33,6 @@ const filmsData = (state = initialState, action) => {
       return {
         ...state,
         promoFilm: action.payload,
-        isDataLoaded: true,
       };
     case ActionType.LOAD_SIMILAR_FILMS:
       return {

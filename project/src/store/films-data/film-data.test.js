@@ -34,6 +34,7 @@ describe('Reducer: filmsData', () => {
   it('should update films by load films', () => {
     const state = {
       films: [],
+      isDataLoaded: false,
     };
 
     const action = {
@@ -44,6 +45,7 @@ describe('Reducer: filmsData', () => {
     expect(filmsData(state, action))
       .toEqual({
         films: ['film#1', 'film#2', 'film#3'],
+        isDataLoaded: true,
       });
   });
 
@@ -72,7 +74,6 @@ describe('Reducer: filmsData', () => {
   it('should update promo film by load promo film', () => {
     const state = {
       promoFilm: {},
-      isDataLoaded: false,
     };
 
     const action = {
@@ -89,7 +90,6 @@ describe('Reducer: filmsData', () => {
           id: 5,
           title: 'Matrix',
         },
-        isDataLoaded: true,
       });
   });
 

@@ -3,6 +3,9 @@ const LIKE_THIS_FILMS_COUNT = 4;
 const PREVIEW_VIDEO_DELAY = 1000;
 const SHOW_MORE_FILMS_COUNT = 8;
 const ALL_GENRES = 'All genres';
+const COMMENT_MIN_LENGTH = 50;
+const COMMENT_MAX_LENGTH = 400;
+const SUBMIT_ERROR_DELAY = 4500;
 
 const AppRoute = {
   MAIN: '/',
@@ -42,6 +45,9 @@ export {
   AuthorizationStatus,
   APIRoute,
   ALL_GENRES,
+  COMMENT_MAX_LENGTH,
+  COMMENT_MIN_LENGTH,
+  SUBMIT_ERROR_DELAY,
   RATING_COUNT,
   LIKE_THIS_FILMS_COUNT,
   SHOW_MORE_FILMS_COUNT,

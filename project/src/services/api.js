@@ -23,6 +23,7 @@ const createAPI = (onUnauthorized) => {
 
     if (data.token) {
       api.defaults.headers.common['X-token'] = data.token;
+      localStorage.setItem('token', data.token);
     }
 
     return response;

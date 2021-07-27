@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {changeGenre, getFilmsByGenre} from '../../store/action.js';
+import {fetchPromoFilm} from '../../store/api-actions';
 
 import {getGenre, getPromoFilm, getFilms, getFilmsByGenres} from '../../store/films-data/selectors.js';
 
@@ -18,13 +19,17 @@ import Footer from '../footer/footer';
 
 import {SHOW_MORE_FILMS_COUNT} from '../../const.js';
 
-function MainPage({films, genre, onGenreChange, filmsByGenre, promoFilm}) {
+function MainPage({loadPromo, films, genre, onGenreChange, filmsByGenre, promoFilm}) {
   const history = useHistory();
   const [shownFilmsCount, setShownFilmsCount] = useState(Math.min(filmsByGenre.length, SHOW_MORE_FILMS_COUNT));
 
   useEffect(() => {
     setShownFilmsCount(SHOW_MORE_FILMS_COUNT);
   }, [filmsByGenre]);
+
+  useEffect(() => {
+    loadPromo();
+  }, [loadPromo]);
 
   const handleShowMoreClick = () => {
     setShownFilmsCount(shownFilmsCount + SHOW_MORE_FILMS_COUNT);
@@ -94,6 +99,7 @@ function MainPage({films, genre, onGenreChange, filmsByGenre, promoFilm}) {
 }
 
 MainPage.propTypes = {
+  loadPromo: PropTypes.func.isRequired,
   films: PropTypes.arrayOf(filmProp).isRequired,
   promoFilm: PropTypes.shape(filmProp).isRequired,
   genre: PropTypes.string.isRequired,
@@ -112,6 +118,9 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreChange(genre) {
     dispatch(changeGenre(genre));
     dispatch(getFilmsByGenre());
+  },
+  loadPromo() {
+    dispatch(fetchPromoFilm());
   },
 });
 

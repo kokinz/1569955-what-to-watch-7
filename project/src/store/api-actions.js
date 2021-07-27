@@ -34,10 +34,11 @@ const fetchReviews = (id) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadReviews(data)))
 );
 
-const postReview = ({id, rating, comment}) => (dispatch, _getState, api) => (
+const postReview = ({id, rating, comment}, handleSubmitError) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, {rating, comment})
     .then(({data}) => dispatch(loadReviews(data)))
     .then(() => dispatch(redirectToRoute(`${APIRoute.FILMS}/${id}`)))
+    .catch(() => handleSubmitError())
 );
 
 const postFavorite = ({id, state}) => (dispatch, _getState, api) => (

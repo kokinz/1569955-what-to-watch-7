@@ -1,16 +1,17 @@
 import React, {useState, useRef} from 'react';
-import {generatePath} from 'react-router';
+import {generatePath, useHistory} from 'react-router';
 import {Link} from 'react-router-dom';
 
 import filmProp from '../film-page/film.prop';
 
-import {PREVIEW_VIDEO_DELAY} from '../../const.js';
+import {PREVIEW_VIDEO_DELAY, AppRoute} from '../../const.js';
 
 function FilmCard({film}) {
   const {id, name, previewImage, previewVideoLink} = film;
   const [delayHandler, setDelayHandler] =  useState(null);
 
   const player = useRef();
+  const history = useHistory();
 
   const handleMouseEnter = () => {
     setDelayHandler(setTimeout(() => player.current.play(), PREVIEW_VIDEO_DELAY));
@@ -21,13 +22,18 @@ function FilmCard({film}) {
     player.current.load();
   };
 
+  const handleMouseClick = () => {
+    history.push(generatePath(AppRoute.FILM, {id: id}));
+    clearTimeout(delayHandler);
+  };
+
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="small-film-card__image">
-        <video src={previewVideoLink} poster={previewImage} ref={player} width="213.25" height="175" muted />
+    <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMouseClick} >
+      <div className="small-film-card__image" >
+        <video src={previewVideoLink} poster={previewImage} ref={player} width="280" muted />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={generatePath('/films/:id/', {id: id})} onClick={handleMouseLeave}>
+        <Link className="small-film-card__link" to={generatePath(AppRoute.FILM, {id: id})} onClick={handleMouseLeave}>
           {name}
         </Link>
       </h3>
