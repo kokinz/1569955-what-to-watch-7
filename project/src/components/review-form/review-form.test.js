@@ -9,10 +9,8 @@ import ReviewForm from './review-form';
 const id = 1;
 const onSubmit = () => {};
 
-let store = null;
-
 const mockStore = configureStore({});
-store = mockStore();
+const store = mockStore();
 
 describe('Component: ReviewForm', () => {
   it('should render correctly', () => {

@@ -7,8 +7,6 @@ import configureStore from 'redux-mock-store';
 import {AuthorizationStatus} from '../../const';
 import MyListPage from './my-list-page';
 
-let store = null;
-
 const films = [{
   id: 1,
   name: 'Pulp Fiction',
@@ -29,6 +27,15 @@ const films = [{
   isFavorite: true,
 }];
 
+const createFakeStore = configureStore({});
+
+const store = createFakeStore({
+  USER_DATA: {authorizationStatus: AuthorizationStatus.AUTH},
+  FILMS_DATA: {genre: 'All genres', films: films, film: {...films}, favoriteFilms: films, promoFilm: {...films}, filmsByGenre: films, similarFilms: films, isDataLoaded: true},
+  REVIEWS_DATA: {reviews: []},
+});
+
+
 jest.mock('../../store/api-actions', () => {
   const mockFetch = () => ({type: 'loadFavoriteFilms', payload: films});
   return {
@@ -42,14 +49,6 @@ describe('Component: MyListPage', () => {
     Object.defineProperty(HTMLMediaElement.prototype, 'muted', {
       set: jest.fn(),
       get: () => jest.fn(),
-    });
-
-    const createFakeStore = configureStore({});
-
-    store = createFakeStore({
-      USER_DATA: {authorizationStatus: AuthorizationStatus.AUTH},
-      FILMS_DATA: {genre: 'All genres', films: films, film: {...films}, favoriteFilms: films, promoFilm: {...films}, filmsByGenre: films, similarFilms: films, isDataLoaded: true},
-      REVIEWS_DATA: {reviews: []},
     });
   });
 

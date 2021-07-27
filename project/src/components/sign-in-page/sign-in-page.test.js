@@ -8,10 +8,8 @@ import {Provider} from 'react-redux';
 import SignInPage from './sign-in-page';
 import {AuthorizationStatus} from '../../const.js';
 
-let store = null;
-
 const mockStore = configureStore({});
-store = mockStore({
+const store = mockStore({
   USER_DATA: {authorizationStatus: AuthorizationStatus.NO_AUTH},
 });
 
