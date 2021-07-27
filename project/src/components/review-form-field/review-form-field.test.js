@@ -14,7 +14,7 @@ describe('Component: ReviewFormField', () => {
 
     const {getByText} = render(
       <Router history={history}>
-        <ReviewFormField index={index} value={value} handleRatingChange={handleRatingChange} />
+        <ReviewFormField index={index} value={value} handleRatingChange={handleRatingChange} isDisabled={false} />
       </Router>,
     );
 
