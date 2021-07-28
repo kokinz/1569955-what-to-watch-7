@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/1569955-what-to-watch-7/static/js/main.2bcb7aa0.chunk.js",
-    "main.js.map": "/1569955-what-to-watch-7/static/js/main.2bcb7aa0.chunk.js.map",
+    "main.js": "/1569955-what-to-watch-7/static/js/main.c3a3de23.chunk.js",
+    "main.js.map": "/1569955-what-to-watch-7/static/js/main.c3a3de23.chunk.js.map",
     "runtime-main.js": "/1569955-what-to-watch-7/static/js/runtime-main.554c990f.js",
     "runtime-main.js.map": "/1569955-what-to-watch-7/static/js/runtime-main.554c990f.js.map",
     "static/js/2.e6f37cd5.chunk.js": "/1569955-what-to-watch-7/static/js/2.e6f37cd5.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.554c990f.js",
     "static/js/2.e6f37cd5.chunk.js",
-    "static/js/main.2bcb7aa0.chunk.js"
+    "static/js/main.c3a3de23.chunk.js"
   ]
 }
