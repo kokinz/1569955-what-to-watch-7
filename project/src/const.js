@@ -24,13 +24,13 @@ const RatingLevelNumber = {
 };
 
 const AppRoute = {
-  MAIN: '/https://kokinz.github.io/',
-  LOGIN: '/https://kokinz.github.io/login',
-  MY_LIST: '/https://kokinz.github.io/mylist',
-  FILM: '/https://kokinz.github.io/films/:id',
-  ADD_REVIEW: '/https://kokinz.github.io/films/:id/review',
-  PLAYER: '/https://kokinz.github.io/player/:id',
-  NOT_FOUND: '/https://kokinz.github.io/404',
+  MAIN: '/',
+  LOGIN: '/login',
+  MY_LIST: '/mylist',
+  FILM: '/films/:id',
+  ADD_REVIEW: '/films/:id/review',
+  PLAYER: '/player/:id',
+  NOT_FOUND: '/404',
 };
 
 const FilmTab = {
