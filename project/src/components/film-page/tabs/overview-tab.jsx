@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import filmProp from '../film.prop';
-import {RatingLevel} from '../../../const.js';
+import {RatingLevel, RatingLevelNumber} from '../../../const.js';
 
 const getLevel = (rating) => {
-  if (Math.trunc(rating) === 10) {
+  if (Math.trunc(rating) === RatingLevelNumber.AWESOME) {
     return RatingLevel.AWESOME;
   }
-  if (Math.trunc(rating) >= 8) {
+  if (Math.trunc(rating) >= RatingLevelNumber.VERY_GOOD) {
     return RatingLevel.VERY_GOOD;
   }
-  if (Math.trunc(rating) >= 5) {
+  if (Math.trunc(rating) >= RatingLevelNumber.GOOD) {
     return RatingLevel.GOOD;
   }
-  if (Math.trunc(rating) >= 3) {
+  if (Math.trunc(rating) >= RatingLevelNumber.NORMAL) {
     return RatingLevel.NORMAL;
   }
   return RatingLevel.BAD;

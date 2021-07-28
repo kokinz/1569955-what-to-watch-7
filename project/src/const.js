@@ -16,6 +16,13 @@ const RatingLevel = {
   BAD: 'Bad',
 };
 
+const RatingLevelNumber = {
+  AWESOME: 10,
+  VERY_GOOD: 8,
+  GOOD: 5,
+  NORMAL: 3,
+};
+
 const AppRoute = {
   MAIN: '/',
   LOGIN: '/login',
@@ -50,6 +57,7 @@ const APIRoute = {
 
 export {
   RatingLevel,
+  RatingLevelNumber,
   AppRoute,
   FilmTab,
   AuthorizationStatus,

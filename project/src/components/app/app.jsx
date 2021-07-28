@@ -16,7 +16,7 @@ import MyListPage from '../my-list-page/my-list-page';
 import FilmPage from '../film-page/film-page';
 import AddReviewPage from '../add-review-page/add-review-page';
 import PlayerPage from '../player-page/player-page';
-import NotFounfPage from '../not-found-page/not-found-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function App({films, authorizationStatus, isDataLoaded}) {
@@ -57,7 +57,7 @@ function App({films, authorizationStatus, isDataLoaded}) {
         />
       </Route>
       <Route>
-        <NotFounfPage path={AppRoute.NOT_FOUND}/>
+        <NotFoundPage path={AppRoute.NOT_FOUND}/>
       </Route>
     </Switch>
   );
