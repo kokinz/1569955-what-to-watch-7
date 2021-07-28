@@ -32,7 +32,7 @@ store.dispatch(fetchFilmsList());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter history={browserHistory} basename="/https://kokinz.github.io"/>
+      <BrowserRouter history={browserHistory} >
         <App />
       </BrowserRouter>
     </Provider>
