@@ -20,7 +20,7 @@ import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 import LoadingScreen from '../loading-screen/loading-screen.jsx';
 
-import {LIKE_THIS_FILMS_COUNT, ROUNDING_INTEGER} from '../../const.js';
+import {AppRoute, LIKE_THIS_FILMS_COUNT, ROUNDING_INTEGER} from '../../const.js';
 import {checkAuthorized} from '../../utils.js';
 
 function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) {
@@ -57,14 +57,14 @@ function FilmPage({film, similarFilms, reviews, loadData, authorizationStatus}) 
                 <span className="film-card__year">{film.released}</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(`/player/${filmId}`)}>
+                <button className="btn btn--play film-card__button" type="button" onClick={() => history.push(generatePath(AppRoute.PLAYER, {id: filmId}))}>
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s" />
                   </svg>
                   <span>Play</span>
                 </button>
                 <MyListButton film={film} />
-                {checkAuthorized(authorizationStatus) ? <Link className="btn film-card__button" to={generatePath('/films/:id/review', {id: filmId})}>Add review</Link> : ''}
+                {checkAuthorized(authorizationStatus) ? <Link className="btn film-card__button" to={generatePath(AppRoute.ADD_REVIEW, {id: filmId})}>Add review</Link> : ''}
               </div>
             </div>
           </div>

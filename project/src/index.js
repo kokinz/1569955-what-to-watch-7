@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Router as BrowserRouter} from 'react-router-dom';
+import {HashRouter as BrowserRouter} from 'react-router-dom';
 import browserHistory from './browser-history';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
@@ -14,7 +14,7 @@ import rootReducer from './store/root-reducer';
 import {requireAuthorization} from './store/action';
 import {checkAuth, fetchFilmsList} from './store/api-actions';
 
-import {AuthorizationStatus} from './const.js';
+import {AppRoute, AuthorizationStatus} from './const.js';
 import {redirect} from './store/middlewares/redirect';
 
 const store = createStore(rootReducer, composeWithDevTools(
@@ -40,3 +40,11 @@ ReactDOM.render(
 
   document.getElementById('root'),
 );
+
+window.onbeforeunload = (evt) => {
+  evt.preventDefault();
+
+  if (evt) {
+    browserHistory.push(AppRoute.MAIN);
+  }
+};

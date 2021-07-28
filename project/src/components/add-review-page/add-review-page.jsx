@@ -8,7 +8,7 @@ import filmProp from '../film-page/film.prop';
 import Logo from '../logo/logo';
 import UserAvatar from '../user-avatar/user-avatar';
 import ReviewForm from '../review-form/review-form';
-import {ROUNDING_INTEGER} from '../../const';
+import {AppRoute, ROUNDING_INTEGER} from '../../const';
 
 function AddReviewPage({films}) {
   const filmId = parseInt(useParams().id, ROUNDING_INTEGER);
@@ -26,7 +26,7 @@ function AddReviewPage({films}) {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={generatePath('/films/:id/', {id: filmId})} className="breadcrumbs__link">{film.name}</Link>
+                <Link to={generatePath(AppRoute.FILM, {id: filmId})} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link" href="/" onClick={(evt) => evt.preventDefault()}>Add review</a>

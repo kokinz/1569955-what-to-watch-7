@@ -1,6 +1,7 @@
 import {loadFilms, redirectToRoute, loadFilm, loadPromoFilm, loadSimilarFilms, loadReviews, requireAuthorization, logout as closeSession, loadFavoriteFilms} from './action';
 import {AuthorizationStatus, APIRoute, AppRoute} from '../const.js';
 import {adaptFilmsToClient, adaptFilmToClient} from '../services/adapter.js';
+import { generatePath } from 'react-router-dom';
 
 const fetchFilmsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)
@@ -37,7 +38,7 @@ const fetchReviews = (id) => (dispatch, _getState, api) => (
 const postReview = ({id, rating, comment}, handleSubmitError) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, {rating, comment})
     .then(({data}) => dispatch(loadReviews(data)))
-    .then(() => dispatch(redirectToRoute(`${APIRoute.FILMS}/${id}`)))
+    .then(() => dispatch(redirectToRoute(generatePath(AppRoute.FILM, {id: id}))))
     .catch(() => handleSubmitError())
 );
 

@@ -1,11 +1,11 @@
 import React, {useRef, useState} from 'react';
-import {useParams, useHistory} from 'react-router-dom';
+import {useParams, useHistory, generatePath} from 'react-router-dom';
 import {useElapsedTime} from 'use-elapsed-time';
 import Moment from 'react-moment';
 
 import PropTypes from 'prop-types';
 import filmProp from '../film-page/film.prop';
-import {APIRoute, ROUNDING_INTEGER} from '../../const.js';
+import {AppRoute, ROUNDING_INTEGER} from '../../const.js';
 
 function PlayerPage({films}) {
   const filmId = parseInt(useParams().id, ROUNDING_INTEGER);
@@ -51,7 +51,7 @@ function PlayerPage({films}) {
     <div className="player">
       <video ref={player} src={film.videoLink} className="player__video" poster={film.posterImage} />
 
-      <button type="button" className="player__exit" onClick={() => history.push(`${APIRoute.FILMS}/${filmId}`)}>Exit</button>
+      <button type="button" className="player__exit" onClick={() => history.push(generatePath(AppRoute.FILM, {id: filmId}))}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">

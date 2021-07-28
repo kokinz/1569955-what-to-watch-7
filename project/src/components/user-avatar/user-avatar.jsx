@@ -23,7 +23,7 @@ function UserAvatar({authorizationStatus, onLogout}) {
       <ul className="user-block">
         <li className="user-block__item">
           <div className="user-block__avatar" onClick={() => history.push(AppRoute.MY_LIST)}>
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+            <img src="https://kokinz.github.io/1569955-what-to-watch-7/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
           </div>
         </li>
         <li className="user-block__item">
