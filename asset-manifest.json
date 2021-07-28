@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/1569955-what-to-watch-7/static/js/main.c3a3de23.chunk.js",
-    "main.js.map": "/1569955-what-to-watch-7/static/js/main.c3a3de23.chunk.js.map",
+    "main.js": "/1569955-what-to-watch-7/static/js/main.b6916724.chunk.js",
+    "main.js.map": "/1569955-what-to-watch-7/static/js/main.b6916724.chunk.js.map",
     "runtime-main.js": "/1569955-what-to-watch-7/static/js/runtime-main.554c990f.js",
     "runtime-main.js.map": "/1569955-what-to-watch-7/static/js/runtime-main.554c990f.js.map",
-    "static/js/2.e6f37cd5.chunk.js": "/1569955-what-to-watch-7/static/js/2.e6f37cd5.chunk.js",
-    "static/js/2.e6f37cd5.chunk.js.map": "/1569955-what-to-watch-7/static/js/2.e6f37cd5.chunk.js.map",
+    "static/js/2.aa9981a2.chunk.js": "/1569955-what-to-watch-7/static/js/2.aa9981a2.chunk.js",
+    "static/js/2.aa9981a2.chunk.js.map": "/1569955-what-to-watch-7/static/js/2.aa9981a2.chunk.js.map",
     "index.html": "/1569955-what-to-watch-7/index.html",
-    "static/js/2.e6f37cd5.chunk.js.LICENSE.txt": "/1569955-what-to-watch-7/static/js/2.e6f37cd5.chunk.js.LICENSE.txt"
+    "static/js/2.aa9981a2.chunk.js.LICENSE.txt": "/1569955-what-to-watch-7/static/js/2.aa9981a2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.554c990f.js",
-    "static/js/2.e6f37cd5.chunk.js",
-    "static/js/main.c3a3de23.chunk.js"
+    "static/js/2.aa9981a2.chunk.js",
+    "static/js/main.b6916724.chunk.js"
   ]
 }
