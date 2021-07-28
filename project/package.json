@@ -1,4 +1,5 @@
 {
+  "homepage": "http://kokinz.github.io/1569955-what-to-watch-7",
   "name": "project",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +19,8 @@
     "use-elapsed-time": "3.0.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
@@ -51,6 +54,7 @@
     "@testing-library/user-event": "^12.8.0",
     "axios-mock-adapter": "^1.19.0",
     "eslint-config-htmlacademy": "^4.0.2",
+    "gh-pages": "^3.2.3",
     "redux-devtools-extension": "^2.13.9",
     "redux-mock-store": "^1.5.4"
   }
